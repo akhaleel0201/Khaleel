@@ -1,146 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sharmi Mart</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharmi Mart - Grocery Store</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: white;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
       margin: 0;
       padding: 0;
     }
     header {
-      background: #333;
-      color: white;
+      background-color: #eee;
       padding: 1em;
       text-align: center;
     }
-    .container {
-      padding: 2em;
-    }
     .product {
       border: 1px solid #ccc;
-      margin: 1em 0;
+      border-radius: 10px;
       padding: 1em;
+      margin: 1em;
+      width: 300px;
+      display: inline-block;
+      vertical-align: top;
     }
-    .product h3 {
-      margin: 0.5em 0;
-    }
-    button {
-      padding: 0.5em;
-      background: #333;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    #cart {
-      margin-top: 2em;
-    }
-    #checkoutForm {
-      margin-top: 2em;
-      display: none;
-    }
-    input, textarea {
+    .product img {
       width: 100%;
-      padding: 0.5em;
-      margin: 0.5em 0;
+      height: auto;
+      border-radius: 10px;
     }
-    .whatsapp-link {
-      margin-top: 1em;
-      display: block;
-      font-weight: bold;
+    .checkout {
+      text-align: center;
+      margin-top: 2em;
+    }
+    .qr {
+      max-width: 200px;
+      margin: 1em auto;
+    }
+    .whatsapp-button {
+      background: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Sharmi Mart</h1>
+    <p>Order groceries online and pay with TnG</p>
   </header>
-  <div class="container">
-    <div id="products"></div>
-    <div id="cart">
-      <h2>Cart</h2>
-      <ul id="cartItems"></ul>
-      <p><strong>Total: RM <span id="total">0</span></strong></p>
-      <button onclick="checkout()">Checkout</button>
+
+  <section class="products">
+    <div class="product">
+      <img src="Mutani solid bar 1.jpg" alt="Multani Mitti" />
+      <h2>Pure Fullers Earth Solid Bar (200g)</h2>
+      <p>Fights acne, brightens skin, and deep cleanses.</p>
+      <strong>RM18</strong>
     </div>
 
-    <form id="checkoutForm">
-      <h2>Checkout</h2>
-      <input type="text" placeholder="Your Name" id="name" required>
-      <input type="text" placeholder="Phone Number" id="phone" required>
-      <textarea placeholder="Delivery Address" id="address" required></textarea>
-      <p>Please scan the Touch 'n Go QR code to pay and then send order + receipt via WhatsApp.</p>
-      <img src="tng_qr_placeholder.png" alt="TnG QR Code" width="200">
-      <a class="whatsapp-link" id="whatsappLink" target="_blank">Send Order via WhatsApp</a>
-    </form>
-  </div>
-  <script>
-    const products = [
-      { name: "Pure Fullers Earth Solid Bar", price: 18, weight: "250g", description: "Multani Mitti fights acne, evens skin tone, treats tanning..." },
-      { name: "Natural Himalaya Black Salt", price: 11.9, weight: "450g", description: "Kala Namak aids digestion, cooling spice, weight loss aid..." },
-      { name: "Ceylon Cinnamon Sticks", price: 13, weight: "100g", description: "Gred C5, fragrant, ideal for curries and tea..." },
-      { name: "Dry Amla - Nellikai", price: 9.5, weight: "250g", description: "Boosts digestion, hair health, antioxidant rich..." },
-      { name: "Kadukkai - Haritaki Seed", price: 10, weight: "250g", description: "Constipation relief, antioxidant, detox benefits..." },
-      { name: "Horse Gram - Kollu", price: 5, weight: "300g", description: "Weight loss aid, reduces belly fat, rich in nutrients..." }
-    ];
+    <div class="product">
+      <img src="bills_38.jpg" alt="Himalayan Black Salt" />
+      <h2>Himalayan Black Salt (400g)</h2>
+      <p>Cooling spice, digestive benefits, ayurvedic uses.</p>
+      <strong>RM11.90</strong>
+    </div>
 
-    let cart = [];
+    <div class="product">
+      <img src="ceylon_cinnamon1.jpg" alt="Ceylon Cinnamon" />
+      <h2>Organic Pure Ceylon Cinnamon (50g)</h2>
+      <p>High-quality C5 grade soft cinnamon sticks.</p>
+      <strong>RM13</strong>
+    </div>
+  </section>
 
-    function renderProducts() {
-      const container = document.getElementById('products');
-      products.forEach((product, index) => {
-        container.innerHTML += `
-          <div class="product">
-            <h3>${product.name} - RM ${product.price}</h3>
-            <p>${product.description}</p>
-            <p><strong>Weight:</strong> ${product.weight}</p>
-            <button onclick="addToCart(${index})">Add to Cart</button>
-          </div>
-        `;
-      });
-    }
+  <section class="checkout">
+    <h2>Checkout & Payment</h2>
+    <p>Scan the QR below using Touch 'n Go eWallet to pay:</p>
+    <img class="qr" src="khaleel ent QR.jpg" alt="TnG QR Code" />
 
-    function addToCart(index) {
-      cart.push(products[index]);
-      updateCart();
-    }
-
-    function updateCart() {
-      const cartItems = document.getElementById('cartItems');
-      const totalEl = document.getElementById('total');
-      cartItems.innerHTML = "";
-      let total = 0;
-      cart.forEach((item, i) => {
-        cartItems.innerHTML += `<li>${item.name} - RM ${item.price}</li>`;
-        total += item.price;
-      });
-      totalEl.innerText = total.toFixed(2);
-    }
-
-    function checkout() {
-      document.getElementById('checkoutForm').style.display = 'block';
-      const name = document.getElementById('name');
-      const phone = document.getElementById('phone');
-      const address = document.getElementById('address');
-      const whatsappLink = document.getElementById('whatsappLink');
-
-      function updateWhatsAppLink() {
-        let msg = `Order for Sharmi Mart:%0A`;
-        cart.forEach(p => msg += `- ${p.name} (RM${p.price})%0A`);
-        msg += `%0ATotal: RM ${cart.reduce((sum, p) => sum + p.price, 0).toFixed(2)}%0A`;
-        msg += `Name: ${name.value}%0APhone: ${phone.value}%0AAddress: ${address.value}`;
-        whatsappLink.href = `https://wa.me/60165533200?text=${msg}`;
-      }
-
-      name.oninput = updateWhatsAppLink;
-      phone.oninput = updateWhatsAppLink;
-      address.oninput = updateWhatsAppLink;
-    }
-
-    renderProducts();
-  </script>
+    <p>Once paid, confirm your order via WhatsApp:</p>
+    <a class="whatsapp-button" href="https://wa.me/60165533200" target="_blank">Confirm Order on WhatsApp</a>
+  </section>
 </body>
 </html>
