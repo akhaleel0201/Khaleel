@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sharmi Mart</title>
-  <style> 
+  <style>
     body {
       font-family: Arial, sans-serif;
       background-color: white;
@@ -29,7 +29,6 @@
       border: 1px solid #ddd;
       padding: 10px;
       width: 250px;
-      cursor: pointer;
     }
     .product img {
       width: 100%;
@@ -48,6 +47,15 @@
       padding-top: 10px;
       font-size: 14px;
     }
+    .cart-form {
+      margin-top: 10px;
+    }
+    .cart-form input[type="number"] {
+      width: 60px;
+    }
+    .cart-form select {
+      margin-top: 5px;
+    }
     .whatsapp {
       text-align: center;
       padding: 20px;
@@ -60,6 +68,17 @@
       border-radius: 5px;
       font-size: 16px;
     }
+    .checkout {
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+    }
+    .checkout textarea, .checkout input {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 14px;
+    }
   </style>
   <script>
     function toggleDescription(id) {
@@ -71,20 +90,19 @@
 <body>
   <div class="header">Sharmi Mart</div>
   <div class="container">
-   <div class="product" onclick="toggleDescription('desc1')">
-  <img src="Mutani solid bar 1.jpg" alt="Multani Mitti">
-  <div class="product-title">Pure Fullers Earth Solid Bar - 200g</div>
-  <div class="product-price">RM18</div>
-  <div class="product-description" id="desc1">
-    <div style="display: flex; gap: 10px; overflow-x: auto;">
-      <img src="Mutani solid bar 1.jpg" alt="Front view" style="width: 100px;" />
-      <img src="mutani_side.jpg" alt="Side view" style="width: 100px;" />
-      <img src="mutani_back.jpg" alt="Back view" style="width: 100px;" />
+    <div class="product" onclick="toggleDescription('desc1')">
+      <img src="Mutani solid bar 1.jpg" alt="Multani Mitti">
+      <div class="product-title">Pure Fullers Earth Solid Bar - 200g</div>
+      <div class="product-price">RM18</div>
+      <div class="product-description" id="desc1">
+        <p>Multani Mitti is known to fight acne, remove oil, deep cleanse, brighten complexion, and treat tanning, pigmentation, sunburn, rashes, and blackheads. Also has antiseptic and cooling properties.</p>
+        <p><strong>Package Weight:</strong> 250g</p>
+        <form class="cart-form">
+          Quantity: <input type="number" min="1" value="1" /><br>
+          <button type="button">Add to Cart</button>
+        </form>
+      </div>
     </div>
-    <p>Multani Mitti is known to fight acne, remove oil, deep cleanse, brighten complexion, and treat tanning, pigmentation, sunburn, rashes, and blackheads. Also has antiseptic and cooling properties.</p>
-    <p><strong>Package Weight:</strong> 250g</p>
-  </div>
-</div>
 
     <div class="product" onclick="toggleDescription('desc2')">
       <img src="bills_38.jpg" alt="Himalayan Salt">
@@ -93,6 +111,10 @@
       <div class="product-description" id="desc2">
         <p>Kala Namak supports digestion, reduces water retention, and promotes better gut health. Ideal for low-sodium diets and helps in slimming.</p>
         <p><strong>Package Weight:</strong> 450g</p>
+        <form class="cart-form">
+          Quantity: <input type="number" min="1" value="1" /><br>
+          <button type="button">Add to Cart</button>
+        </form>
       </div>
     </div>
 
@@ -103,19 +125,35 @@
       <div class="product-description" id="desc3">
         <p>Light-yellowish soft cinnamon sticks, Gred C5, highly fragrant, for curries, tea, and rice. Thin rolled bark with potent aroma.</p>
         <p><strong>Package Weight:</strong> 100g</p>
+        <form class="cart-form">
+          Quantity: <input type="number" min="1" value="1" /><br>
+          <label>Weight Option:</label>
+          <select>
+            <option>50g</option>
+            <option>100g</option>
+          </select><br>
+          <button type="button">Add to Cart</button>
+        </form>
       </div>
     </div>
+  </div>
+
+  <div class="checkout">
+    <h3>Delivery Details</h3>
+    <input type="text" placeholder="Full Name" required />
+    <input type="text" placeholder="Phone Number" required />
+    <textarea placeholder="Delivery Address" rows="4" required></textarea>
   </div>
 
   <div class="whatsapp">
     <p>To place your order, please confirm via WhatsApp:</p>
     <a href="https://wa.me/60165533200" target="_blank">Confirm Order on WhatsApp</a>
   </div>
-  <div style="text-align: center; padding: 20px;">
-  <h3>Pay with TnG eWallet</h3>
-  <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
-  <p>Scan this QR to complete payment. Send receipt via WhatsApp to confirm.</p>
-</div>
 
+  <div style="text-align: center; padding: 20px;">
+    <h3>Pay with TnG eWallet</h3>
+    <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
+    <p>Scan this QR to complete payment. Send receipt via WhatsApp to confirm.</p>
+  </div>
 </body>
 </html>
