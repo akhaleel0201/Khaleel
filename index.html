@@ -43,36 +43,25 @@
       font-weight: bold;
     }
     .product-description {
-      display: none;
-      padding-top: 10px;
       font-size: 14px;
-    }
-    .cart-form {
-      margin-top: 10px;
+      padding: 10px 0;
     }
     .cart-form input[type="number"],
-    .checkout input,
-    .checkout textarea {
+    .cart-form select {
       width: 100%;
       margin-top: 10px;
       padding: 8px;
       font-size: 14px;
     }
-    .cart-form select {
-      margin-top: 5px;
-    }
-    .whatsapp {
-      text-align: center;
-      padding: 20px;
-    }
-    .whatsapp a, .whatsapp button {
-      background-color: #25d366;
+    .cart-form button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
       color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 16px;
       border: none;
+      border-radius: 5px;
+      font-size: 14px;
       cursor: pointer;
     }
     .checkout, .summary {
@@ -92,6 +81,19 @@
     .summary th {
       background-color: #f0f0f0;
     }
+    .whatsapp {
+      text-align: center;
+      padding: 20px;
+    }
+    .whatsapp button {
+      background-color: #25d366;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
     .footer {
       text-align: center;
       font-size: 12px;
@@ -101,11 +103,6 @@
   </style>
   <script>
     const cart = [];
-
-    function toggleDescription(id) {
-      const desc = document.getElementById(id);
-      desc.style.display = desc.style.display === "block" ? "none" : "block";
-    }
 
     function addToCart(productTitle, price, inputId, selectId) {
       const quantity = parseInt(document.getElementById(inputId).value);
@@ -118,20 +115,13 @@
     }
 
     function updateSummary() {
-      const table = document.getElementById("summaryTable");
-      const tbody = table.querySelector("tbody");
+      const tbody = document.querySelector("#summaryTable tbody");
       tbody.innerHTML = "";
       let grandTotal = 0;
 
-      cart.forEach((item, index) => {
+      cart.forEach((item, i) => {
         grandTotal += parseFloat(item.totalPrice);
-        const row = `<tr>
-          <td>${index + 1}</td>
-          <td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
-          <td>${item.quantity}</td>
-          <td>RM${item.totalPrice}</td>
-        </tr>`;
-        tbody.innerHTML += row;
+        tbody.innerHTML += `<tr><td>${i+1}</td><td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td><td>${item.quantity}</td><td>RM${item.totalPrice}</td></tr>`;
       });
 
       document.getElementById("grandTotal").textContent = "RM" + grandTotal.toFixed(2);
@@ -165,7 +155,42 @@
 <body>
   <div class="header">Sharmi Mart</div>
   <div class="container">
-    <!-- Product listing section can be expanded here with images, variants -->
+    <div class="product">
+      <img src="Mutani solid bar 1.jpg" alt="Multani">
+      <div class="product-title">Fullers Earth Solid Bar</div>
+      <div class="product-price">RM18</div>
+      <div class="product-description">Purifying face bar for oily and acne-prone skin.</div>
+      <div class="cart-form">
+        <select id="variant1">
+          <option value="200g">200g</option>
+          <option value="400g">400g</option>
+        </select>
+        <input type="number" id="qty1" placeholder="Quantity">
+        <button onclick="addToCart('Fullers Earth Solid Bar', 18, 'qty1', 'variant1')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="bills_38.jpg" alt="Himalayan Salt">
+      <div class="product-title">Himalayan Black Salt</div>
+      <div class="product-price">RM11.90</div>
+      <div class="product-description">Natural black salt for digestion and cooking.</div>
+      <div class="cart-form">
+        <input type="number" id="qty2" placeholder="Quantity">
+        <button onclick="addToCart('Himalayan Black Salt', 11.9, 'qty2')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="ceylon_cinnamon1.jpg" alt="Ceylon Cinnamon">
+      <div class="product-title">Ceylon Cinnamon Sticks</div>
+      <div class="product-price">RM13</div>
+      <div class="product-description">Organic Ceylon Cinnamon Sticks, fragrant and natural.</div>
+      <div class="cart-form">
+        <input type="number" id="qty3" placeholder="Quantity">
+        <button onclick="addToCart('Ceylon Cinnamon Sticks', 13, 'qty3')">Add to Cart</button>
+      </div>
+    </div>
   </div>
 
   <div class="checkout">
@@ -179,16 +204,9 @@
     <h3>Order Summary</h3>
     <table id="summaryTable">
       <thead>
-        <tr>
-          <th>#</th>
-          <th>Item</th>
-          <th>Qty</th>
-          <th>Total</th>
-        </tr>
+        <tr><th>#</th><th>Item</th><th>Qty</th><th>Total</th></tr>
       </thead>
-      <tbody>
-        <!-- Order summary rows populated via JS -->
-      </tbody>
+      <tbody></tbody>
     </table>
     <p><strong>Grand Total:</strong> <span id="grandTotal">RM0.00</span></p>
   </div>
