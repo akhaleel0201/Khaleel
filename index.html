@@ -65,13 +65,15 @@
       text-align: center;
       padding: 20px;
     }
-    .whatsapp a {
+    .whatsapp a, .whatsapp button {
       background-color: #25d366;
       color: white;
       padding: 10px 20px;
       text-decoration: none;
       border-radius: 5px;
       font-size: 16px;
+      border: none;
+      cursor: pointer;
     }
     .checkout {
       padding: 20px;
@@ -90,9 +92,19 @@
     }
   </style>
   <script>
+    const cart = [];
+
     function toggleDescription(id) {
-      var desc = document.getElementById(id);
+      const desc = document.getElementById(id);
       desc.style.display = desc.style.display === "block" ? "none" : "block";
+    }
+
+    function addToCart(productTitle, price, inputId, selectId) {
+      const quantity = document.getElementById(inputId).value;
+      const variant = selectId ? document.getElementById(selectId).value : "";
+      const totalPrice = (price * quantity).toFixed(2);
+      cart.push({ title: productTitle, quantity, price, variant, totalPrice });
+      alert("Added to cart");
     }
 
     function confirmOrder() {
@@ -105,7 +117,15 @@
         return;
       }
 
-      let message = `New Order from Sharmi Mart\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
+      let message = `New Order from Sharmi Mart\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nOrdered Items:`;
+      let grandTotal = 0;
+
+      cart.forEach(item => {
+        message += `\n- ${item.title} ${item.variant ? '(' + item.variant + ')' : ''} x${item.quantity} = RM${item.totalPrice}`;
+        grandTotal += parseFloat(item.totalPrice);
+      });
+
+      message += `\n\nTotal: RM${grandTotal.toFixed(2)}`;
 
       const url = `https://wa.me/60165533200?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
@@ -122,9 +142,9 @@
       <div class="product-description" id="desc1">
         <p>Multani Mitti is known to fight acne, remove oil, deep cleanse, brighten complexion, and treat tanning, pigmentation, sunburn, rashes, and blackheads. Also has antiseptic and cooling properties.</p>
         <p><strong>Package Weight:</strong> 250g</p>
-        <form class="cart-form">
-          Quantity: <input type="number" min="1" value="1" /><br>
-          <button type="button">Add to Cart</button>
+        <form class="cart-form" onsubmit="return false">
+          Quantity: <input type="number" id="qty1" min="1" value="1" /><br>
+          <button onclick="addToCart('Pure Fullers Earth Solid Bar', 18, 'qty1')">Add to Cart</button>
         </form>
       </div>
     </div>
@@ -136,28 +156,28 @@
       <div class="product-description" id="desc2">
         <p>Kala Namak supports digestion, reduces water retention, and promotes better gut health. Ideal for low-sodium diets and helps in slimming.</p>
         <p><strong>Package Weight:</strong> 450g</p>
-        <form class="cart-form">
-          Quantity: <input type="number" min="1" value="1" /><br>
-          <button type="button">Add to Cart</button>
+        <form class="cart-form" onsubmit="return false">
+          Quantity: <input type="number" id="qty2" min="1" value="1" /><br>
+          <button onclick="addToCart('Himalayan Black Salt - 400g', 11.90, 'qty2')">Add to Cart</button>
         </form>
       </div>
     </div>
 
     <div class="product" onclick="toggleDescription('desc3')">
       <img src="ceylon_cinnamon1.jpg" alt="Ceylon Cinnamon">
-      <div class="product-title">Organic Pure Ceylon Cinnamon Sticks - 50g</div>
+      <div class="product-title">Organic Pure Ceylon Cinnamon Sticks</div>
       <div class="product-price">RM13</div>
       <div class="product-description" id="desc3">
         <p>Light-yellowish soft cinnamon sticks, Gred C5, highly fragrant, for curries, tea, and rice. Thin rolled bark with potent aroma.</p>
         <p><strong>Package Weight:</strong> 100g</p>
-        <form class="cart-form">
-          Quantity: <input type="number" min="1" value="1" /><br>
+        <form class="cart-form" onsubmit="return false">
+          Quantity: <input type="number" id="qty3" min="1" value="1" /><br>
           <label>Weight Option:</label>
-          <select>
+          <select id="var3">
             <option>50g</option>
             <option>100g</option>
           </select><br>
-          <button type="button">Add to Cart</button>
+          <button onclick="addToCart('Ceylon Cinnamon Sticks', 13, 'qty3', 'var3')">Add to Cart</button>
         </form>
       </div>
     </div>
