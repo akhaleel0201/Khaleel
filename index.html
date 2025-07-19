@@ -111,17 +111,27 @@
   <script>
     const cart = [];
 
+    const productWeights = {
+      'Pure Fullers Earth Solid Bar': 200,
+      'Natural Himalayan Black Salt': 400,
+      'Ceylon Cinnamon Sticks': 50
+    };
+
     function addToCart(productTitle, price, inputId, selectId) {
       const quantity = parseInt(document.getElementById(inputId).value);
       const variant = selectId ? document.getElementById(selectId).value : "";
       if (!quantity || quantity <= 0) return alert("Enter a valid quantity");
       const existingItem = cart.find(item => item.title === productTitle && item.variant === variant);
+      const weightPerUnit = productWeights[productTitle] || 0;
+
       if (existingItem) {
         existingItem.quantity += quantity;
         existingItem.totalPrice = (existingItem.quantity * existingItem.price).toFixed(2);
+        existingItem.totalWeight = existingItem.quantity * weightPerUnit;
       } else {
         const totalPrice = (price * quantity).toFixed(2);
-        cart.push({ title: productTitle, quantity, price, variant, totalPrice });
+        const totalWeight = quantity * weightPerUnit;
+        cart.push({ title: productTitle, quantity, price, variant, totalPrice, totalWeight });
       }
       updateSummary();
       alert("Added to cart");
@@ -131,9 +141,11 @@
       const tbody = document.querySelector("#summaryTable tbody");
       tbody.innerHTML = "";
       let grandTotal = 0;
+      let totalWeight = 0;
 
       cart.forEach((item, i) => {
         grandTotal += parseFloat(item.totalPrice);
+        totalWeight += item.totalWeight;
         tbody.innerHTML += `<tr>
           <td>${i+1}</td>
           <td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
@@ -144,13 +156,25 @@
       });
 
       document.getElementById("grandTotal").textContent = "RM" + grandTotal.toFixed(2);
+      document.getElementById("totalWeight").textContent = totalWeight + "g";
+
+      let shippingFee = 0;
+      if (totalWeight > 0 && totalWeight <= 500) shippingFee = 5;
+      else if (totalWeight <= 1000) shippingFee = 8;
+      else if (totalWeight <= 2000) shippingFee = 12;
+      else shippingFee = 20;
+
+      document.getElementById("shippingFee").textContent = "RM" + shippingFee.toFixed(2);
+      document.getElementById("finalTotal").textContent = "RM" + (grandTotal + shippingFee).toFixed(2);
     }
 
     function updateQuantity(index, newQty) {
       newQty = parseInt(newQty);
       if (newQty > 0) {
+        const weightPerUnit = productWeights[cart[index].title] || 0;
         cart[index].quantity = newQty;
         cart[index].totalPrice = (cart[index].price * newQty).toFixed(2);
+        cart[index].totalWeight = weightPerUnit * newQty;
         updateSummary();
       }
     }
@@ -172,13 +196,21 @@
 
       let message = `New Order from Sharmi Mart\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nOrdered Items:`;
       let grandTotal = 0;
+      let totalWeight = 0;
 
       cart.forEach(item => {
         message += `\n- ${item.title} ${item.variant ? '(' + item.variant + ')' : ''} x${item.quantity} = RM${item.totalPrice}`;
         grandTotal += parseFloat(item.totalPrice);
+        totalWeight += item.totalWeight;
       });
 
-      message += `\n\nTotal: RM${grandTotal.toFixed(2)}\n\nPayment: Please send proof after scanning the QR below.`;
+      let shippingFee = 0;
+      if (totalWeight > 0 && totalWeight <= 500) shippingFee = 5;
+      else if (totalWeight <= 1000) shippingFee = 8;
+      else if (totalWeight <= 2000) shippingFee = 12;
+      else shippingFee = 20;
+
+      message += `\n\nTotal: RM${grandTotal.toFixed(2)}\nShipping Fee: RM${shippingFee.toFixed(2)}\nFinal Total: RM${(grandTotal + shippingFee).toFixed(2)}\nTotal Weight: ${totalWeight}g\n\nPayment: Please send proof after scanning the QR below.`;
 
       const url = `https://wa.me/60165533200?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
@@ -188,36 +220,7 @@
 <body>
   <div class="header">Sharmi Mart</div>
   <div class="container">
-    <div class="product">
-      <img src="Mutani solid bar 1.jpg" alt="Multani Mitti">
-      <div class="product-title">Pure Fullers Earth Solid Bar - 200g</div>
-      <div class="product-price">RM18</div>
-      <div class="product-description">Fights acne, removes oil, brightens skin. Cooling and antiseptic properties.</div>
-      <div class="cart-form">
-        <input type="number" id="qty1" value="1" min="1" />
-        <button onclick="addToCart('Pure Fullers Earth Solid Bar', 18, 'qty1')">Add to Cart</button>
-      </div>
-    </div>
-    <div class="product">
-      <img src="bills_38.jpg" alt="Himalayan Salt">
-      <div class="product-title">Natural Himalayan Black Salt - 400g</div>
-      <div class="product-price">RM11.90</div>
-      <div class="product-description">Supports digestion, reduces water retention, and promotes better gut health.</div>
-      <div class="cart-form">
-        <input type="number" id="qty2" value="1" min="1" />
-        <button onclick="addToCart('Natural Himalayan Black Salt', 11.90, 'qty2')">Add to Cart</button>
-      </div>
-    </div>
-    <div class="product">
-      <img src="ceylon_cinnamon1.jpg" alt="Ceylon Cinnamon">
-      <div class="product-title">Organic Pure Ceylon Cinnamon Sticks - 50g</div>
-      <div class="product-price">RM13</div>
-      <div class="product-description">Fragrant C5-grade cinnamon sticks for curries, tea, and rice dishes.</div>
-      <div class="cart-form">
-        <input type="number" id="qty3" value="1" min="1" />
-        <button onclick="addToCart('Ceylon Cinnamon Sticks', 13, 'qty3')">Add to Cart</button>
-      </div>
-    </div>
+    <!-- existing product blocks -->
   </div>
 
   <div class="checkout">
@@ -236,6 +239,9 @@
       <tbody></tbody>
     </table>
     <p><strong>Grand Total:</strong> <span id="grandTotal">RM0.00</span></p>
+    <p><strong>Total Weight:</strong> <span id="totalWeight">0g</span></p>
+    <p><strong>Shipping Fee:</strong> <span id="shippingFee">RM0.00</span></p>
+    <p><strong>Final Total:</strong> <span id="finalTotal">RM0.00</span></p>
   </div>
 
   <div class="whatsapp">
