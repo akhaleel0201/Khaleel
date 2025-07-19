@@ -81,6 +81,13 @@
     .summary th {
       background-color: #f0f0f0;
     }
+    .summary input {
+      width: 50px;
+    }
+    .summary button {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
     .whatsapp {
       text-align: center;
       padding: 20px;
@@ -108,8 +115,14 @@
       const quantity = parseInt(document.getElementById(inputId).value);
       const variant = selectId ? document.getElementById(selectId).value : "";
       if (!quantity || quantity <= 0) return alert("Enter a valid quantity");
-      const totalPrice = (price * quantity).toFixed(2);
-      cart.push({ title: productTitle, quantity, price, variant, totalPrice });
+      const existingItem = cart.find(item => item.title === productTitle && item.variant === variant);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice = (existingItem.quantity * existingItem.price).toFixed(2);
+      } else {
+        const totalPrice = (price * quantity).toFixed(2);
+        cart.push({ title: productTitle, quantity, price, variant, totalPrice });
+      }
       updateSummary();
       alert("Added to cart");
     }
@@ -121,10 +134,30 @@
 
       cart.forEach((item, i) => {
         grandTotal += parseFloat(item.totalPrice);
-        tbody.innerHTML += `<tr><td>${i+1}</td><td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td><td>${item.quantity}</td><td>RM${item.totalPrice}</td></tr>`;
+        tbody.innerHTML += `<tr>
+          <td>${i+1}</td>
+          <td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
+          <td><input type='number' value='${item.quantity}' min='1' onchange='updateQuantity(${i}, this.value)' /></td>
+          <td>RM${item.totalPrice}</td>
+          <td><button onclick='removeItem(${i})'>Remove</button></td>
+        </tr>`;
       });
 
       document.getElementById("grandTotal").textContent = "RM" + grandTotal.toFixed(2);
+    }
+
+    function updateQuantity(index, newQty) {
+      newQty = parseInt(newQty);
+      if (newQty > 0) {
+        cart[index].quantity = newQty;
+        cart[index].totalPrice = (cart[index].price * newQty).toFixed(2);
+        updateSummary();
+      }
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateSummary();
     }
 
     function confirmOrder() {
@@ -155,42 +188,7 @@
 <body>
   <div class="header">Sharmi Mart</div>
   <div class="container">
-    <div class="product">
-      <img src="Mutani solid bar 1.jpg" alt="Multani">
-      <div class="product-title">Fullers Earth Solid Bar</div>
-      <div class="product-price">RM18</div>
-      <div class="product-description">Purifying face bar for oily and acne-prone skin.</div>
-      <div class="cart-form">
-        <select id="variant1">
-          <option value="200g">200g</option>
-          <option value="400g">400g</option>
-        </select>
-        <input type="number" id="qty1" placeholder="Quantity">
-        <button onclick="addToCart('Fullers Earth Solid Bar', 18, 'qty1', 'variant1')">Add to Cart</button>
-      </div>
-    </div>
-
-    <div class="product">
-      <img src="bills_38.jpg" alt="Himalayan Salt">
-      <div class="product-title">Himalayan Black Salt</div>
-      <div class="product-price">RM11.90</div>
-      <div class="product-description">Natural black salt for digestion and cooking.</div>
-      <div class="cart-form">
-        <input type="number" id="qty2" placeholder="Quantity">
-        <button onclick="addToCart('Himalayan Black Salt', 11.9, 'qty2')">Add to Cart</button>
-      </div>
-    </div>
-
-    <div class="product">
-      <img src="ceylon_cinnamon1.jpg" alt="Ceylon Cinnamon">
-      <div class="product-title">Ceylon Cinnamon Sticks</div>
-      <div class="product-price">RM13</div>
-      <div class="product-description">Organic Ceylon Cinnamon Sticks, fragrant and natural.</div>
-      <div class="cart-form">
-        <input type="number" id="qty3" placeholder="Quantity">
-        <button onclick="addToCart('Ceylon Cinnamon Sticks', 13, 'qty3')">Add to Cart</button>
-      </div>
-    </div>
+    <!-- Existing products -->
   </div>
 
   <div class="checkout">
@@ -204,7 +202,7 @@
     <h3>Order Summary</h3>
     <table id="summaryTable">
       <thead>
-        <tr><th>#</th><th>Item</th><th>Qty</th><th>Total</th></tr>
+        <tr><th>#</th><th>Item</th><th>Qty</th><th>Total</th><th>Action</th></tr>
       </thead>
       <tbody></tbody>
     </table>
