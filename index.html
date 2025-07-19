@@ -110,19 +110,68 @@
     }
   </style>
   <script>
+    // Your product data array (replace/update from Excel anytime)
+    const products = [
+      {
+        title: "Pure Fullers Earth Solid Bar",
+        alias: "fullersEarth",
+        price: 12.0,
+        description: "Natural cleansing bar for skincare.",
+        weight: 200,
+        image: "Mutani solid bar 1.jpg"
+      },
+      {
+        title: "Natural Himalayan Black Salt",
+        alias: "himalayanSalt",
+        price: 8.5,
+        description: "Mineral-rich salt for cooking.",
+        weight: 400,
+        image: "bills_38.jpg"
+      },
+      {
+        title: "Ceylon Cinnamon Sticks",
+        alias: "ceylonCinnamon",
+        price: 15.0,
+        description: "Premium cinnamon sticks.",
+        weight: 50,
+        image: "ceylon_cinnamon1.jpg"
+      }
+    ];
+
     const cart = [];
 
-    const productWeights = {
-      'Pure Fullers Earth Solid Bar': 200,
-      'Natural Himalayan Black Salt': 400,
-      'Ceylon Cinnamon Sticks': 50
-    };
+    function generateProductHTML() {
+      const container = document.querySelector('.container');
+      container.innerHTML = '';
+      products.forEach(product => {
+        const productHTML = `
+          <div class="product">
+            <img src="${product.image}" alt="${product.title}" />
+            <div class="product-title">${product.title}</div>
+            <div class="product-price">RM${product.price.toFixed(2)}</div>
+            <div class="product-description">
+              ${product.description}<br /><strong>Weight per unit:</strong> ${product.weight}g
+            </div>
+            <form class="cart-form" onsubmit="event.preventDefault(); addToCart('${product.title}', ${product.price}, 'qty_${product.alias}');">
+              <input type="number" id="qty_${product.alias}" value="1" min="1" />
+              <button type="submit">Add to Cart</button>
+            </form>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', productHTML);
+      });
+    }
 
-    function addToCart(productTitle, price, inputId, selectId) {
+    // Dynamically build productWeights map from products array
+    const productWeights = {};
+    products.forEach(p => {
+      productWeights[p.title] = p.weight;
+    });
+
+    function addToCart(productTitle, price, inputId) {
       const quantity = parseInt(document.getElementById(inputId).value);
-      const variant = selectId ? document.getElementById(selectId).value : "";
       if (!quantity || quantity <= 0) return alert("Enter a valid quantity");
-      const existingItem = cart.find(item => item.title === productTitle && item.variant === variant);
+      const existingItem = cart.find(item => item.title === productTitle);
       const weightPerUnit = productWeights[productTitle] || 0;
 
       if (existingItem) {
@@ -132,7 +181,7 @@
       } else {
         const totalPrice = (price * quantity).toFixed(2);
         const totalWeight = quantity * weightPerUnit;
-        cart.push({ title: productTitle, quantity, price, variant, totalPrice, totalWeight });
+        cart.push({ title: productTitle, quantity, price, variant: "", totalPrice, totalWeight });
       }
       updateSummary();
       alert("Added to cart");
@@ -196,6 +245,11 @@
         return;
       }
 
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
       let message = `New Order from Sharmi Mart\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nOrdered Items:`;
       let grandTotal = 0;
       let totalWeight = 0;
@@ -217,86 +271,76 @@
       const url = `https://wa.me/60165533200?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     }
+
+    // Generate products on page load
+    window.onload = () => {
+      generateProductHTML();
+      updateSummary();
+    };
   </script>
 </head>
 <body>
   <div class="header">Sharmi Mart</div>
 
   <div class="container">
-    <div class="product">
-      <img src="Mutani solid bar 1.jpg" alt="Pure Fullers Earth Solid Bar" />
-      <div class="product-title">Pure Fullers Earth Solid Bar</div>
-      <div class="product-price">RM12.00</div>
-      <div class="product-description">
-        Natural cleansing bar for skincare.<br /><strong>Weight per unit:</strong> 200g
-      </div>
-      <form class="cart-form" onsubmit="event.preventDefault(); addToCart('Pure Fullers Earth Solid Bar', 12, 'qtyFullers');">
-        <input type="number" id="qtyFullers" value="1" min="1" />
-        <button type="submit">Add to Cart</button>
-      </form>
-    </div>
-
-    <div class="product">
-      <img src="bills_38.jpg" alt="Natural Himalayan Black Salt" />
-      <div class="product-title">Natural Himalayan Black Salt</div>
-      <div class="product-price">RM8.50</div>
-      <div class="product-description">
-        Mineral-rich salt for cooking.<br /><strong>Weight per unit:</strong> 400g
-      </div>
-      <form class="cart-form" onsubmit="event.preventDefault(); addToCart('Natural Himalayan Black Salt', 8.5, 'qtySalt');">
-        <input type="number" id="qtySalt" value="1" min="1" />
-        <button type="submit">Add to Cart</button>
-      </form>
-    </div>
-
-    <div class="product">
-      <img src="ceylon_cinnamon1.jpg" alt="Ceylon Cinnamon Sticks" />
-      <div class="product-title">Ceylon Cinnamon Sticks</div>
-      <div class="product-price">RM15.00</div>
-      <div class="product-description">
-        Premium cinnamon sticks.<br /><strong>Weight per unit:</strong> 50g
-      </div>
-      <form class="cart-form" onsubmit="event.preventDefault(); addToCart('Ceylon Cinnamon Sticks', 15, 'qtyCinnamon');">
-        <input type="number" id="qtyCinnamon" value="1" min="1" />
-        <button type="submit">Add to Cart</button>
-      </form>
-    </div>
+    <!-- Products generated dynamically here -->
   </div>
 
   <div class="checkout">
-    <h3>Delivery Details</h3>
-    <input type="text" id="name" placeholder="Full Name" required />
-    <input type="text" id="phone" placeholder="Phone Number" required />
-    <textarea id="address" placeholder="Delivery Address" rows="4" required></textarea>
-  </div>
+    <h2>Your Order Summary</h2>
+    <div class="summary">
+      <table id="summaryTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Weight</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Cart items go here -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="3">Grand Total:</th>
+            <th id="grandTotal">RM0.00</th>
+            <th id="totalWeight">0g</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="3">Shipping Fee:</th>
+            <th id="shippingFee">RM0.00</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="3">Final Total:</th>
+            <th id="finalTotal">RM0.00</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
 
-  <div class="summary">
-    <h3>Order Summary</h3>
-    <table id="summaryTable">
-      <thead>
-        <tr><th>#</th><th>Item</th><th>Qty</th><th>Total</th><th>Weight</th><th>Action</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <p><strong>Grand Total:</strong> <span id="grandTotal">RM0.00</span></p>
-    <p><strong>Total Weight:</strong> <span id="totalWeight">0g</span></p>
-    <p><strong>Shipping Fee:</strong> <span id="shippingFee">RM0.00</span></p>
-    <p><strong>Final Total:</strong> <span id="finalTotal">RM0.00</span></p>
+    <h3>Delivery Details</h3>
+    <form id="deliveryForm" onsubmit="event.preventDefault(); confirmOrder();">
+      <label>Name:<br /><input type="text" id="name" required /></label><br /><br />
+      <label>Phone:<br /><input type="tel" id="phone" required /></label><br /><br />
+      <label>Address:<br /><textarea id="address" rows="3" required></textarea></label><br /><br />
+      <button type="submit">Confirm & Send Order via WhatsApp</button>
+    </form>
   </div>
 
   <div class="whatsapp">
-    <p>To place your order, please confirm via WhatsApp:</p>
-    <button onclick="confirmOrder()">Send Order via WhatsApp</button>
-  </div>
-
-  <div style="text-align: center; padding: 20px;">
-    <h3>Pay with TnG eWallet</h3>
-    <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
-    <p>Scan this QR to complete payment. Send receipt via WhatsApp to confirm.</p>
+    <button onclick="confirmOrder()">Order via WhatsApp</button>
   </div>
 
   <div class="footer">
-    &copy; 2025 Sharmi Mart. All rights reserved. Powered by GitHub Pages.
+    &copy; 2025 Sharmi Mart. All rights reserved.
   </div>
 </body>
 </html>
