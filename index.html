@@ -275,7 +275,7 @@
       else shippingFee = 20;
 
       message += `\n\nTotal: RM${grandTotal.toFixed(2)}\nShipping Fee: RM${shippingFee.toFixed(2)}\nFinal Total: RM${(grandTotal + shippingFee).toFixed(2)}\nTotal Weight: ${totalWeight}g\n\nPayment: Please send proof after scanning the QR below.`;
-       <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
+       
 
       const url = `https://wa.me/60165533200?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
