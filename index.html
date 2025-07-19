@@ -5,68 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sharmi Mart</title>
   <style>
- @media (max-width: 768px) {
-  .summary-table-wrapper table,
-  .summary-table-wrapper thead,
-  .summary-table-wrapper tbody,
-  .summary-table-wrapper th,
-  .summary-table-wrapper td,
-  .summary-table-wrapper tr {
-    display: block;
-    width: 100%;
-  }
-
-  .summary-table-wrapper thead {
-    display: none;
-  }
-
-  .summary-table-wrapper tbody tr {
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    background: #f9f9f9;
-  }
-
-  .summary-table-wrapper td {
-    position: relative;
-    padding-left: 50%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: left;
-    border: none;
-    border-bottom: 1px solid #eee;
-  }
-
-  .summary-table-wrapper td::before {
-    position: absolute;
-    left: 10px;
-    width: 45%;
-    white-space: nowrap;
-    font-weight: bold;
-    content: attr(data-label);
-  }
-
-  .summary tfoot {
-    display: block;
-    text-align: center;
-    padding-top: 10px;
-  }
-
-  .summary tfoot tr {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .summary tfoot th {
-    width: 100%;
-    text-align: left;
-    border: none;
-  }
-}
-
-
     body {
       font-family: Arial, sans-serif;
       background-color: white;
@@ -266,17 +204,14 @@
       cart.forEach((item, i) => {
         grandTotal += parseFloat(item.totalPrice);
         totalWeight += item.totalWeight;
-        tbody.innerHTML += `
-<tr>
-  <td data-label="#">${i + 1}</td>
-  <td data-label="Product">${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
-  <td data-label="Quantity">
-    <input type='number' value='${item.quantity}' min='1' onchange='updateQuantity(${i}, this.value)' />
-  </td>
-  <td data-label="Total Price">RM${item.totalPrice}</td>
-  <td data-label="Weight">${item.totalWeight}g</td>
-  <td data-label="Remove"><button onclick='removeItem(${i})'>Remove</button></td>
-</tr>`;
+        tbody.innerHTML += `<tr>
+          <td>${i+1}</td>
+          <td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
+          <td><input type='number' value='${item.quantity}' min='1' onchange='updateQuantity(${i}, this.value)' /></td>
+          <td>RM${item.totalPrice}</td>
+          <td>${item.totalWeight}g</td>
+          <td><button onclick='removeItem(${i})'>Remove</button></td>
+        </tr>`;
       });
 
       document.getElementById("grandTotal").textContent = "RM" + grandTotal.toFixed(2);
@@ -363,8 +298,7 @@
   <div class="checkout">
     <h2>Your Order Summary</h2>
     <div class="summary">
-      <div class="summary-table-wrapper">
-       <table id="summaryTable">
+      <table id="summaryTable">
         <thead>
           <tr>
             <th>#</th>
@@ -399,7 +333,6 @@
           </tr>
         </tfoot>
       </table>
-        </div>
     </div>
 
     <h3>Delivery Details</h3>
