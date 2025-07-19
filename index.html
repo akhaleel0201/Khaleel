@@ -5,64 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sharmi Mart</title>
   <style>
-    @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .product {
-    width: 90%;
-  }
-
-  .summary table {
-    font-size: 13px;
-  }
-
-  .summary td, .summary th {
-    padding: 6px;
-  }
-
-  .checkout, .summary {
-    padding: 10px;
-  }
-
-  .whatsapp img {
-    width: 150px !important;
-  }
-
-  .summary table {
+ @media (max-width: 768px) {
+  .summary-table-wrapper table,
+  .summary-table-wrapper thead,
+  .summary-table-wrapper tbody,
+  .summary-table-wrapper th,
+  .summary-table-wrapper td,
+  .summary-table-wrapper tr {
     display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .checkout h2, .checkout h3 {
-    font-size: 18px;
-  }
-
-  input[type="text"], input[type="tel"], textarea {
     width: 100%;
-    font-size: 14px;
   }
 
-  .cart-form input[type="number"] {
-    font-size: 14px;
+  .summary-table-wrapper thead {
+    display: none;
   }
 
-  .cart-form button {
-    font-size: 14px;
-  }
-
-  .checkout button {
-    font-size: 15px;
+  .summary-table-wrapper tbody tr {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
     padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
   }
 
-  .product-description {
-    font-size: 13px;
+  .summary-table-wrapper td {
+    position: relative;
+    padding-left: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .summary-table-wrapper td::before {
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: bold;
+    content: attr(data-label);
+  }
+
+  .summary tfoot {
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .summary tfoot tr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .summary tfoot th {
+    width: 100%;
+    text-align: left;
+    border: none;
   }
 }
+
 
     body {
       font-family: Arial, sans-serif;
@@ -357,7 +360,8 @@
   <div class="checkout">
     <h2>Your Order Summary</h2>
     <div class="summary">
-      <table id="summaryTable">
+      <div class="summary-table-wrapper">
+       <table id="summaryTable">
         <thead>
           <tr>
             <th>#</th>
@@ -392,6 +396,7 @@
           </tr>
         </tfoot>
       </table>
+        </div>
     </div>
 
     <h3>Delivery Details</h3>
