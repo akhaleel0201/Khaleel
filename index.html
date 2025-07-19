@@ -266,14 +266,17 @@
       cart.forEach((item, i) => {
         grandTotal += parseFloat(item.totalPrice);
         totalWeight += item.totalWeight;
-        tbody.innerHTML += `<tr>
-          <td>${i+1}</td>
-          <td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
-          <td><input type='number' value='${item.quantity}' min='1' onchange='updateQuantity(${i}, this.value)' /></td>
-          <td>RM${item.totalPrice}</td>
-          <td>${item.totalWeight}g</td>
-          <td><button onclick='removeItem(${i})'>Remove</button></td>
-        </tr>`;
+        tbody.innerHTML += `
+<tr>
+  <td data-label="#">${i + 1}</td>
+  <td data-label="Product">${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
+  <td data-label="Quantity">
+    <input type='number' value='${item.quantity}' min='1' onchange='updateQuantity(${i}, this.value)' />
+  </td>
+  <td data-label="Total Price">RM${item.totalPrice}</td>
+  <td data-label="Weight">${item.totalWeight}g</td>
+  <td data-label="Remove"><button onclick='removeItem(${i})'>Remove</button></td>
+</tr>`;
       });
 
       document.getElementById("grandTotal").textContent = "RM" + grandTotal.toFixed(2);
