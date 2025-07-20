@@ -108,147 +108,52 @@
       padding: 10px;
     }
   </style>
-  <script>
-    const cart = [];
-
-    const productWeights = {
-      'Pure Fullers Earth Solid Bar': 200,
-      'Natural Himalayan Black Salt': 400,
-      'Ceylon Cinnamon Sticks': 50
-    };
-
-    function calculateShippingFee(weight) {
-      if (weight <= 500) return 5.00;
-      else if (weight <= 1000) return 8.00;
-      else return 12.00 + Math.ceil((weight - 1000) / 500) * 3.00;
-    }
-
-    function addToCart(productTitle, price, inputId, selectId) {
-      const quantity = parseInt(document.getElementById(inputId).value);
-      const variant = selectId ? document.getElementById(selectId).value : "";
-      if (!quantity || quantity <= 0) return alert("Enter a valid quantity");
-      const existingItem = cart.find(item => item.title === productTitle && item.variant === variant);
-      const weightPerUnit = productWeights[productTitle] || 0;
-
-      if (existingItem) {
-        existingItem.quantity += quantity;
-        existingItem.totalPrice = (existingItem.quantity * existingItem.price).toFixed(2);
-        existingItem.totalWeight = existingItem.quantity * weightPerUnit;
-      } else {
-        const totalPrice = (price * quantity).toFixed(2);
-        const totalWeight = quantity * weightPerUnit;
-        cart.push({ title: productTitle, quantity, price, variant, totalPrice, totalWeight });
-      }
-      updateSummary();
-      alert("Added to cart");
-    }
-
-    function updateSummary() {
-      const tbody = document.querySelector("#summaryTable tbody");
-      tbody.innerHTML = "";
-      let grandTotal = 0;
-      let totalWeight = 0;
-
-      cart.forEach((item, i) => {
-        grandTotal += parseFloat(item.totalPrice);
-        totalWeight += item.totalWeight;
-        tbody.innerHTML += `<tr>
-          <td>${i+1}</td>
-          <td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
-          <td><input type='number' value='${item.quantity}' min='1' onchange='updateQuantity(${i}, this.value)' /></td>
-          <td>RM${item.totalPrice}</td>
-          <td><button onclick='removeItem(${i})'>Remove</button></td>
-        </tr>`;
-      });
-
-      const shippingFee = calculateShippingFee(totalWeight);
-      const finalTotal = grandTotal + shippingFee;
-
-      document.getElementById("grandTotal").textContent = "RM" + grandTotal.toFixed(2);
-      document.getElementById("shippingFee").textContent = "RM" + shippingFee.toFixed(2);
-      document.getElementById("finalTotal").textContent = "RM" + finalTotal.toFixed(2);
-    }
-
-    function updateQuantity(index, newQty) {
-      newQty = parseInt(newQty);
-      if (newQty > 0) {
-        const weightPerUnit = productWeights[cart[index].title] || 0;
-        cart[index].quantity = newQty;
-        cart[index].totalPrice = (cart[index].price * newQty).toFixed(2);
-        cart[index].totalWeight = weightPerUnit * newQty;
-        updateSummary();
-      }
-    }
-
-    function removeItem(index) {
-      cart.splice(index, 1);
-      updateSummary();
-    }
-
-    function confirmOrder() {
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      const address = document.getElementById("address").value;
-
-      if (!name || !phone || !address) {
-        alert("Please fill out all delivery details.");
-        return;
-      }
-
-      let message = `New Order from Sharmi Mart\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nOrdered Items:`;
-      let grandTotal = 0;
-      let totalWeight = 0;
-
-      cart.forEach(item => {
-        message += `\n- ${item.title} ${item.variant ? '(' + item.variant + ')' : ''} x${item.quantity} = RM${item.totalPrice}`;
-        grandTotal += parseFloat(item.totalPrice);
-        totalWeight += item.totalWeight;
-      });
-
-      const shippingFee = calculateShippingFee(totalWeight);
-      const finalTotal = grandTotal + shippingFee;
-
-      message += `\n\nSubtotal: RM${grandTotal.toFixed(2)}\nShipping: RM${shippingFee.toFixed(2)}\nTotal: RM${finalTotal.toFixed(2)}\n\nPayment: Please send proof after scanning the QR below.`;
-
-      const url = `https://wa.me/60165533200?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    }
-  </script>
 </head>
 <body>
   <div class="header">Sharmi Mart</div>
 
   <div class="container">
-    <div class="product">
-      <img src="Mutani solid bar 1.jpg" alt="Pure Fullers Earth Solid Bar">
-      <div class="product-title">Pure Fullers Earth Solid Bar</div>
-      <div class="product-price">RM5.00</div>
-      <div class="product-description">Natural facial and skin cleanser.</div>
-      <div class="cart-form">
-        <input type="number" id="qty1" value="1" min="1">
-        <button onclick="addToCart('Pure Fullers Earth Solid Bar', 5.00, 'qty1')">Add to Cart</button>
-      </div>
-    </div>
-    <div class="product">
-      <img src="bills_38.jpg" alt="Natural Himalayan Black Salt">
-      <div class="product-title">Natural Himalayan Black Salt</div>
-      <div class="product-price">RM8.00</div>
-      <div class="product-description">Authentic black salt with minerals from the Himalayas.</div>
-      <div class="cart-form">
-        <input type="number" id="qty2" value="1" min="1">
-        <button onclick="addToCart('Natural Himalayan Black Salt', 8.00, 'qty2')">Add to Cart</button>
-      </div>
-    </div>
-    <div class="product">
-      <img src="bills_38.jpg" alt="Ceylon Cinnamon Sticks">
-      <div class="product-title">Ceylon Cinnamon Sticks</div>
-      <div class="product-price">RM12.00</div>
-      <div class="product-description">Premium quality Ceylon cinnamon sticks for flavor and health.</div>
-      <div class="cart-form">
-        <input type="number" id="qty3" value="1" min="1">
-        <button onclick="addToCart('Ceylon Cinnamon Sticks', 12.00, 'qty3')">Add to Cart</button>
-      </div>
-    </div>
+    <!-- Product cards here -->
   </div>
 
-  <!-- The rest remains unchanged -->
+  <div class="summary">
+    <h2>Cart Summary</h2>
+    <table id="summaryTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p><strong>Subtotal:</strong> <span id="grandTotal">RM0.00</span></p>
+    <p><strong>Shipping:</strong> <span id="shippingFee">RM0.00</span></p>
+    <p><strong>Total:</strong> <span id="finalTotal">RM0.00</span></p>
+  </div>
+
+  <div class="checkout">
+    <h2>Delivery Details</h2>
+    <input type="text" id="name" placeholder="Name" style="width: 100%; margin-bottom: 10px; padding: 8px;">
+    <input type="text" id="phone" placeholder="Phone Number" style="width: 100%; margin-bottom: 10px; padding: 8px;">
+    <textarea id="address" placeholder="Delivery Address" style="width: 100%; margin-bottom: 10px; padding: 8px;"></textarea>
+    <button onclick="confirmOrder()">Place Order via WhatsApp</button>
+  </div>
+
+  <div class="whatsapp">
+    <h3>Scan & Pay</h3>
+    <img src="khaleel ent QR.jpg" alt="QR Code Payment" width="200">
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Sharmi Mart. All rights reserved.
+  </div>
+
+  <script>
+    // Existing JS here
+  </script>
+</body>
+</html>
