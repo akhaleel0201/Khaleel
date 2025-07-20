@@ -29,7 +29,6 @@
       border: 1px solid #ddd;
       padding: 10px;
       width: 250px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     }
     .product img {
       width: 100%;
@@ -37,7 +36,7 @@
     }
     .product-title {
       font-weight: bold;
-      margin: 10px 0 5px 0;
+      margin: 10px 0;
     }
     .product-price {
       color: green;
@@ -45,7 +44,7 @@
     }
     .product-description {
       font-size: 14px;
-      padding: 5px 0 10px 0;
+      padding: 10px 0;
     }
     .cart-form input[type="number"],
     .cart-form select {
@@ -110,76 +109,25 @@
     }
   </style>
   <script>
-    // Your product data array (replace/update from Excel anytime)
-    const products = [
-      {
-        title: "Pure Fullers Earth Solid Bar",
-        alias: "fullersEarth",
-        price: 12.0,
-        description: "Natural cleansing bar for skincare.",
-        weight: 200,
-        image: "Mutani solid bar 1.jpg"
-      },
-      {
-        title: "Natural Himalayan Black Salt",
-        alias: "himalayanSalt",
-        price: 8.5,
-        description: "Mineral-rich salt for cooking.",
-        weight: 400,
-        image: "bills_38.jpg"
-      },
-      {
-        title: "Ceylon Cinnamon Sticks",
-        alias: "ceylonCinnamon",
-        price: 15.0,
-        description: "Premium cinnamon sticks.",
-        weight: 50,
-        image: "ceylon_cinnamon1.jpg"
-      },
-      {
-        title: "Maasi Karuvadu - Maldivian Dried Tuna Fish",
-        alias: "Maasi Coarse Pow 50g",
-        price: 10.0,
-        description: "This is Maldives tuna, sustainably sourced and expertly dried. Its high protein content make it an ideal source of nutrition. Enjoy its delicious flavor and crunchy texture in a variety of recipes. Perfect for adding authentic taste to your dishes.  ",
-        weight: 100,
-        image: "maasi.jpg"
-      }
-    ];
-
     const cart = [];
 
-    function generateProductHTML() {
-      const container = document.querySelector('.container');
-      container.innerHTML = '';
-      products.forEach(product => {
-        const productHTML = `
-          <div class="product">
-            <img src="${product.image}" alt="${product.title}" />
-            <div class="product-title">${product.title}</div>
-            <div class="product-price">RM${product.price.toFixed(2)}</div>
-            <div class="product-description">
-              ${product.description}<br /><strong>Weight per unit:</strong> ${product.weight}g
-            </div>
-            <form class="cart-form" onsubmit="event.preventDefault(); addToCart('${product.title}', ${product.price}, 'qty_${product.alias}');">
-              <input type="number" id="qty_${product.alias}" value="1" min="1" />
-              <button type="submit">Add to Cart</button>
-            </form>
-          </div>
-        `;
-        container.insertAdjacentHTML('beforeend', productHTML);
-      });
+    const productWeights = {
+      'Pure Fullers Earth Solid Bar': 200,
+      'Natural Himalayan Black Salt': 400,
+      'Ceylon Cinnamon Sticks': 50
+    };
+
+    function calculateShippingFee(weight) {
+      if (weight <= 500) return 5.00;
+      else if (weight <= 1000) return 8.00;
+      else return 12.00 + Math.ceil((weight - 1000) / 500) * 3.00;
     }
 
-    // Dynamically build productWeights map from products array
-    const productWeights = {};
-    products.forEach(p => {
-      productWeights[p.title] = p.weight;
-    });
-
-    function addToCart(productTitle, price, inputId) {
+    function addToCart(productTitle, price, inputId, selectId) {
       const quantity = parseInt(document.getElementById(inputId).value);
+      const variant = selectId ? document.getElementById(selectId).value : "";
       if (!quantity || quantity <= 0) return alert("Enter a valid quantity");
-      const existingItem = cart.find(item => item.title === productTitle);
+      const existingItem = cart.find(item => item.title === productTitle && item.variant === variant);
       const weightPerUnit = productWeights[productTitle] || 0;
 
       if (existingItem) {
@@ -189,7 +137,7 @@
       } else {
         const totalPrice = (price * quantity).toFixed(2);
         const totalWeight = quantity * weightPerUnit;
-        cart.push({ title: productTitle, quantity, price, variant: "", totalPrice, totalWeight });
+        cart.push({ title: productTitle, quantity, price, variant, totalPrice, totalWeight });
       }
       updateSummary();
       alert("Added to cart");
@@ -209,22 +157,16 @@
           <td>${item.title}${item.variant ? ` (${item.variant})` : ""}</td>
           <td><input type='number' value='${item.quantity}' min='1' onchange='updateQuantity(${i}, this.value)' /></td>
           <td>RM${item.totalPrice}</td>
-          <td>${item.totalWeight}g</td>
           <td><button onclick='removeItem(${i})'>Remove</button></td>
         </tr>`;
       });
 
+      const shippingFee = calculateShippingFee(totalWeight);
+      const finalTotal = grandTotal + shippingFee;
+
       document.getElementById("grandTotal").textContent = "RM" + grandTotal.toFixed(2);
-      document.getElementById("totalWeight").textContent = totalWeight + "g";
-
-      let shippingFee = 0;
-      if (totalWeight > 0 && totalWeight <= 500) shippingFee = 5;
-      else if (totalWeight <= 1000) shippingFee = 8;
-      else if (totalWeight <= 2000) shippingFee = 12;
-      else shippingFee = 20;
-
       document.getElementById("shippingFee").textContent = "RM" + shippingFee.toFixed(2);
-      document.getElementById("finalTotal").textContent = "RM" + (grandTotal + shippingFee).toFixed(2);
+      document.getElementById("finalTotal").textContent = "RM" + finalTotal.toFixed(2);
     }
 
     function updateQuantity(index, newQty) {
@@ -253,11 +195,6 @@
         return;
       }
 
-      if (cart.length === 0) {
-        alert("Your cart is empty.");
-        return;
-      }
-
       let message = `New Order from Sharmi Mart\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nOrdered Items:`;
       let grandTotal = 0;
       let totalWeight = 0;
@@ -268,92 +205,56 @@
         totalWeight += item.totalWeight;
       });
 
-      let shippingFee = 0;
-      if (totalWeight > 0 && totalWeight <= 500) shippingFee = 5;
-      else if (totalWeight <= 1000) shippingFee = 8;
-      else if (totalWeight <= 2000) shippingFee = 12;
-      else shippingFee = 20;
+      const shippingFee = calculateShippingFee(totalWeight);
+      const finalTotal = grandTotal + shippingFee;
 
-      message += `\n\nTotal: RM${grandTotal.toFixed(2)}\nShipping Fee: RM${shippingFee.toFixed(2)}\nFinal Total: RM${(grandTotal + shippingFee).toFixed(2)}\nTotal Weight: ${totalWeight}g\n\nPayment: Please send proof after scanning the QR below.`;
-       
+      message += `\n\nSubtotal: RM${grandTotal.toFixed(2)}\nShipping: RM${shippingFee.toFixed(2)}\nTotal: RM${finalTotal.toFixed(2)}\n\nPayment: Please send proof after scanning the QR below.`;
 
       const url = `https://wa.me/60165533200?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     }
-
-    // Generate products on page load
-    window.onload = () => {
-      generateProductHTML();
-      updateSummary();
-    };
   </script>
 </head>
 <body>
   <div class="header">Sharmi Mart</div>
-
   <div class="container">
-    <!-- Products generated dynamically here -->
+    <!-- existing product blocks -->
   </div>
 
   <div class="checkout">
-    <h2>Your Order Summary</h2>
-    <div class="summary">
-      <table id="summaryTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-            <th>Weight</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Cart items go here -->
-        </tbody>
-        <tfoot>
-          <tr>
-            <th colspan="3">Grand Total:</th>
-            <th id="grandTotal">RM0.00</th>
-            <th id="totalWeight">0g</th>
-            <th></th>
-          </tr>
-          <tr>
-            <th colspan="3">Shipping Fee:</th>
-            <th id="shippingFee">RM0.00</th>
-            <th></th>
-            <th></th>
-          </tr>
-          <tr>
-            <th colspan="3">Final Total:</th>
-            <th id="finalTotal">RM0.00</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-
     <h3>Delivery Details</h3>
-    <form id="deliveryForm" onsubmit="event.preventDefault(); confirmOrder();">
-      <label>Name:<br /><input type="text" id="name" required /></label><br /><br />
-      <label>Phone:<br /><input type="tel" id="phone" required /></label><br /><br />
-      <label>Address:<br /><textarea id="address" rows="3" required></textarea></label><br /><br />
-      <button type="submit">Confirm & Send Order via WhatsApp</button>
-    </form>
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="text" id="phone" placeholder="Phone Number" required />
+    <textarea id="address" placeholder="Delivery Address" rows="4" required></textarea>
+  </div>
+
+  <div class="summary">
+    <h3>Order Summary</h3>
+    <table id="summaryTable">
+      <thead>
+        <tr><th>#</th><th>Item</th><th>Qty</th><th>Total</th><th>Action</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p><strong>Subtotal:</strong> <span id="grandTotal">RM0.00</span></p>
+    <p><strong>Shipping Fee:</strong> <span id="shippingFee">RM0.00</span></p>
+    <p><strong>Total Amount:</strong> <span id="finalTotal">RM0.00</span></p>
+    <p style="display:none"><strong>Total Weight:</strong> <span id="totalWeight"></span></p>
   </div>
 
   <div class="whatsapp">
-  <p>Please scan the QR code to make payment:</p>
-  <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
-  <br /><br />
-  <button onclick="confirmOrder()">Order via WhatsApp</button>
+    <p>To place your order, please confirm via WhatsApp:</p>
+    <button onclick="confirmOrder()">Send Order via WhatsApp</button>
   </div>
 
+  <div style="text-align: center; padding: 20px;">
+    <h3>Pay with TnG eWallet</h3>
+    <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
+    <p>Scan this QR to complete payment. Send receipt via WhatsApp to confirm.</p>
+  </div>
 
   <div class="footer">
-    &copy; 2025 Sharmi Mart. All rights reserved.
+    &copy; 2025 Sharmi Mart. All rights reserved. Powered by GitHub Pages.
   </div>
 </body>
 </html>
