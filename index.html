@@ -241,7 +241,18 @@
         `;
         tbody.appendChild(tr);
       });
-      const shipping = totalWeight > 1000 ? 8 : totalWeight > 500 ? 5 : 3;
+
+      let shipping = 3;
+      if (totalWeight > 5000) {
+        shipping = 35;
+      } else if (totalWeight > 3000) {
+        shipping = 15;
+      } else if (totalWeight > 1000) {
+        shipping = 8;
+      } else if (totalWeight > 500) {
+        shipping = 5;
+      }
+
       document.getElementById('grandTotal').textContent = `RM${subtotal.toFixed(2)}`;
       document.getElementById('shippingFee').textContent = `RM${shipping.toFixed(2)}`;
       document.getElementById('finalTotal').textContent = `RM${(subtotal + shipping).toFixed(2)}`;
