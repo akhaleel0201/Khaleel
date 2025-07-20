@@ -154,70 +154,640 @@
 
   <script>
     const products = [
-      {
-        id: 1,
-        name: "Pure Fullers Earth Solid Bar - 200g",
-        image: "Mutani solid bar 1.jpg",
-        price: 18,
-        weight: 250,
-        description: "Multani Mitti fights acne, deep cleanses, and brightens skin. Has antiseptic and cooling effects."
-      },
-      {
-        id: 2,
-        name: "Natural Himalaya Himalayan Black Salt - 400g",
-        image: "bills_38.jpg",
-        price: 11.90,
-        weight: 450,
-        description: "Kala Namak aids digestion, reduces water retention, and supports slimming."
-      },
-      {
-        id: 3,
-        name: "Organic Pure Ceylon Cinnamon Sticks - 50g",
-        image: "ceylon_cinnamon1.jpg",
-        price: 13,
-        weight: 100,
-        description: "Ceylon cinnamon sticks, C5 grade, thin bark with a strong aroma."
-      },
-      {
-        id: 4,
-        name: "Nilapana Kilangu Powder - Black Musli Powder - Curculigo Orchioides - 50g",
-        image: "nilapanai.jpg",
-        price: 10.00,
-        weight: 50,
-        description: "Restorative tonic for weakness, aphrodisiac for impotence and sperm count, helps with stamina, itches, and skin disease."
-      },
-      {
-        id: 5,
-        name: "Cold Pressed Groundnut oil / Minyak Kacang Tanah 500ml",
-        image: "groundnut_oil.jpg",
-        price: 15.50,
-        weight: 500,
-        description: "Cold pressed to preserve healthy fats. Prevents trans-fat formation. Great for cooking and health."
-      },
-      {
-        id: 6,
-        name: "Naayuruvi Vithai Seeds Powder - Chaff Flower - Achyranthes Aspera 50g",
-        image: "nayurivi.jpg",
-        price: 8.50,
-        weight: 500,
-        description: "Helps in digestion, acts as a laxative, relieves piles."
-      },
-      {
-        id: 7,
-        name: "Amukkara Powder - Ashwagandha Root Powder 100g",
-        image: "amukkara.jpg",
-        price: 17.50,
-        weight: 100,
-        description: "Treats rheumatic disorders, insomnia, male infertility due to low sperm count."
-      },
-      {
-        id: 8,
-        name: "Natural Jaggery - Gula Tebu - Nattu Cakkarai - Brown Sugar 500GM",
-        image: "jaggery.jpg",
-        price: 7.50,
-        weight: 500,
-        description: "Natural alternative to white sugar, rich in minerals and iron, adds flavor and health benefits."
-      }
+   [
+  {
+    id: 1,
+    name: "Maasi Karuvadu - Maldivian Dried Tuna Fish",
+    image: "Maasi Karuvadu - Maldivian Dried Tuna Fish.jpg",
+    price: 10.00,
+    weight: 50,
+    description: "This is Maldives tuna, sustainably sourced and expertly dried. Its high protein content make it an ideal source of nutrition. Enjoy its delicious flavor and crunchy texture in a variety of recipes. Perfect for adding authentic taste to your dishes."
+  },
+  {
+    "id": 2,
+    "name": "Nilapana Kilangu Powder - Black Musli Powder - Curculigo Orchioides - 50g",
+    "image": "Nilapana Kilangu Powder - Black Musli Powder - Curculigo Orchioides - 50g.jpg",
+    "price": 10.00,
+    "weight": 50,
+    "description": "What are the health benefits of nilapanai kilangu? \nIt is said to be a restorative tonic that can cure weakness.\nIt is also said to be an aphrodisiac that can help with impotence, and low sperm count.\nIt is said to help with general body weakness, loss of stamina, and weight gain.\nIt is also said to help with itches and skin diseases."
+  },
+  {
+    "id": 3,
+    "name": "Cold Pressed Groundnut oil / Minyak Kacang Tanah 500ml",
+    "image": "Cold Pressed Groundnut oil / Minyak Kacang Tanah 500ml.jpg",
+    "price": 15.50,
+    "weight": 500,
+    "description": "cold pressed Groundnut oil is manufactured and processed through a traditional way in order to avoid heat while extracting oil. Preventing heat is to avoid the change of natural fat to trans-fat and thus makes it better for health."
+  },
+  {
+    "id": 4,
+    "name": "Naayuruvi Vithai Seeds Powder - Chaff Flower - Achyranthes Aspera 50g",
+    "image": "Naayuruvi Vithai Seeds Powder - Chaff Flower - Achyranthes Aspera 50g.jpg",
+    "price": 8.50,
+    "weight": 500,
+    "description": "-Helps in digestion\n-Laxative and constipation\n-Relief from piles"
+  },
+  {
+    "id": 5,
+    "name": "Amukkara Powder - Ashwagandha Root Powder 100g",
+    "image": "Amukkara Powder - Ashwagandha Root Powder 100g.jpg",
+    "price": 17.50,
+    "weight": 100,
+    "description": "• 100g per bottle \n• Amukkara Kizhangu powder is used for the treatment of rheumatic disorders \n• Insomnia (sleeplessness) \n• male infertility due to oligospermia (low count)."
+  },
+  {
+    "id": 6,
+    "name": "Natural Jaggery - Gula Tebu - Nattu Cakkarai - Brown Sugar 500GM",
+    "image": "Natural Jaggery - Gula Tebu - Nattu Cakkarai - Brown Sugar 500GM.jpg",
+    "price": 7.50,
+    "weight": 500,
+    "description": "Natural jaggery can be used as an effective alternative for white sugar. It gives you special aromatic natural flavour. It can be taken every day in minimum quality which can improve health in many ways. It acts as a natural sweetening agent. Jaggery is also rich in minerals mainly iron."
+  },
+  {
+    "id": 7,
+    "name": "Amanakku Vithai - Castor Seeds 200g",
+    "image": "Amanakku Vithai - Castor Seeds 200g.jpg",
+    "price": 13.00,
+    "weight": 200,
+    "description": "Castor seeds without the hull are used for birth control, constipation, leprosy, and syphilis. Castor oil is used as a laxative for constipation, to start labor in pregnancy, and to start the flow of breast milk."
+  },
+  {
+    "id": 8,
+    "name": "Chekku nalla ennai - Gingelly - sesame Cooking Oil -500ml",
+    "image": "Chekku nalla ennai - Gingelly - sesame Cooking Oil -500ml.jpg",
+    "price": 25.00,
+    "weight": 500,
+    "description": "Sesame seed oil is often used to meats and vegetables or is added to dressings and marinades. Sesame oil is believed to have some important health benefits, like boost bone health."
+  },
+  {
+    "id": 9,
+    "name": "Shatavari Root Powder - Asparagus Racemosus - Thaneer Vittan Kilangu Powder 50g",
+    "image": "Shatavari Root Powder - Asparagus Racemosus - Thaneer Vittan Kilangu Powder 50g.jpg",
+    "price": 15.00,
+    "weight": 50,
+    "description": "Shatavari is beneficial to women of all\n• It helps for the healthy growth of fetus.\n• It can alter the hormone balance.\n• It is also used for birth control and it regularizes the menstrual cycle. The form and dosage to address each requirement is decided only in consultation with the practitioners.\n• It prevents and also cures premenstrual bloating.\n• It functions as a rejuvenating tonic for women from the start of menstruation, throughout the cycle, ovulation, strength of the uterine during pregnancy,and also for smooth delivery.\n• It is good for lactation.\n• It helps to smoothed the transition of menopause stage because of its ability in balancing the hormones.\nHow to consume Thaneervittan Kilangu (Satavar) :\nMorning - Mix 5 gms of powder in 100 ml water, Boil the content for few minutes. once the water gets warm, filter the content and drink it before food. Repeat the same for Evening Dosage after dinner."
+  },
+  {
+    "id": 10,
+    "name": "Natural Jaggery - Gula Tebu - Nattu Cakkarai - Brown Sugar 800g",
+    "image": "Natural Jaggery - Gula Tebu - Nattu Cakkarai - Brown Sugar 800g.jpg",
+    "price": 8.90,
+    "weight": 100,
+    "description": "Natural jaggery can be used as an effective alternative for white sugar. It gives you special aromatic natural flavour. It can be taken every day in minimum quality which can improve health in many ways. It acts as a natural sweetening agent. Jaggery is also rich in minerals mainly iron."
+  },
+  {
+    "id": 11,
+    "name": "Natural Honey TTS Black Sambrani Original - Kemenyan Madu Asli",
+    "image": "Natural Honey TTS Black Sambrani Original - Kemenyan Madu Asli.jpg",
+    "price": 19.90,
+    "weight": 100,
+    "description": "TTS sambrani is Original benzoin resin from tree that gives you a feeling of a purified home and brings you peace and positivity."
+  },
+  {
+    "id": 12,
+    "name": "Siriya Nangai - Siriya Nangai Powder - Kariyat powder 50g (polygala glabra)",
+    "image": "Siriya Nangai - Siriya Nangai Powder - Kariyat powder 50g (polygala glabra).jpg",
+    "price": 9.30,
+    "weight": 50,
+    "description": "Immune System Support: Siriyanangai is often used to strengthen the immune system and make the body more resistant to infections.\nAnti-parasitic: It has been used to treat parasitic infections.\nOther Traditional Uses: It has been used for conditions like jaundice, diarrhea, sinusitis, upper respiratory tract infections, and coughs.\nGood for the skin\nCure Diabetes\nPurifies blood"
+  },
+  {
+    "id": 13,
+    "name": "Mudakathan Keerai Powder - Balloon Vine Plant Powder 50G",
+    "image": "Mudakathan Keerai Powder - Balloon Vine Plant Powder 50G.jpg",
+    "price": 7.00,
+    "weight": 50,
+    "description": "Mudakathan is the best natural remedy for Rheumatoid arthritis and Nervous breakdown.\nMudakathan is considered as a very safe herb that can be used even for treating children’s cough & cold.\nMudakathan has anti-inflammatory properties and is a rich source of antioxidants. It is also found to be effective in treating joint / knee pain"
+  },
+  {
+    "id": 14,
+    "name": "Poonaikali Seed Powder - Kapikacchu Seeds Powder 50g - Mucuna Prurita",
+    "image": "Poonaikali Seed Powder - Kapikacchu Seeds Powder 50g - Mucuna Prurita.jpg",
+    "price": 10.00,
+    "weight": 50,
+    "description": "help to strengthen immunity and physical stamina.\n• Helps blood circulation \n• Decreases symptoms of stress \n• Increases stamina \n• Helps blood circulation \n• Decreases symptoms of stress "
+  },
+  {
+    "id": 15,
+    "name": "Pulut Hitam Paket - Black Glutinous Rice 500g",
+    "image": "Pulut Hitam Paket - Black Glutinous Rice 500g.jpg",
+    "price": 7.30,
+    "weight": 500,
+    "description": "Glutinous rice contains insoluble fiber, it has good antioxidant capacity and is beneficial for the digestive system of children. Trace elements in sticky rice such as iron can also prevent iron deficiency anemia in children. It is high in amylopectin starch and low in amylose starch."
+  },
+  {
+    "id": 16,
+    "name": "Jerangau Merah Serbuk - Sitarathai Powder 50g",
+    "image": "Jerangau Merah Serbuk - Sitarathai Powder 50g.jpg",
+    "price": 11.00,
+    "weight": 50,
+    "description": "• Powder Form of 50g \n• Respiratory Health: It has been traditionally used to alleviate respiratory conditions such as coughs, colds, and chest congestion due to its soothing and antimicrobial properties.\n• This tea soothes your throat and provides relief from incessant coughing. This herbs tea is one of the best ways to consume for various respiratory problems. \n• A household remedy for a cough and cold."
+  },
+  {
+    "id": 17,
+    "name": "Idli Thosai Podi 200g",
+    "image": "Idli Thosai Podi 200g.jpg",
+    "price": 6.40,
+    "weight": 200,
+    "description": "Its a mixture of ground dry spices that typically contains dried chilis, black gram, chickpeas, salt and sesame seeds.\nIdli powder is a flavourful spicy chutney powder, which is mixed with ghee or sesame oil and served as an acconpainment with idli or dosa."
+  },
+  {
+    "id": 18,
+    "name": "Mukkudal Javadhu 3ml Attar Perfume",
+    "image": "Mukkudal Javadhu 3ml Attar Perfume.jpg",
+    "price": 9.90,
+    "weight": 50,
+    "description": "-Non- Alcoholic. Best Attar for long lasting\n-Javadhu has a very calming effect and has an exceptional floral and soothing base notes. - Natural Extracts, Essential Oil & Fragrance;"
+  },
+  {
+    "id": 19,
+    "name": "Arugampul Powder - BermudaGrass Powder 50G",
+    "image": "Arugampul Powder - BermudaGrass Powder 50G.jpg",
+    "price": 9.50,
+    "weight": 50,
+    "description": "This grass is packed with nutrients like chlorophyll, antioxidants, vitamins, and minerals, which offer powerful detoxifying effects.\nIt is commonly used to cleanse the body of toxins, boost immunity, and improve digestion. Regular consumption of Bermuda grass powder can enhance energy levels and support overall wellness.\nAdditionally, Bermuda grass is beneficial for skincare, helping to improve skin tone and reduce inflammation, while also promoting healthy hair growth when used as a mask or in hair oil. It has been used to regulate blood sugar levels, making it a traditional remedy for managing diabetes."
+  },
+  {
+    "id": 20,
+    "name": "Thuthuvalai Powder thoothuvalai solanum trilobatum 50g",
+    "image": "Thuthuvalai Powder thoothuvalai solanum trilobatum 50g.jpg",
+    "price": 9.50,
+    "weight": 50,
+    "description": "Health Benefits of Thoothuvalai\nCold and Cough : This powder is used to treat coughs and colds. It is very effective to cure throat irritation and throat pain. It used to reduce congestion in the nose and chest.\nSinus Problem : This powder is used as a remedy for sinus problems.\nAsthma and Respiratory Problems\nThis used to treat infections, fever, influenza."
+  },
+  {
+    "id": 21,
+    "name": "Potash Alum Stone - Batu Tawas - Padikaram - Fitkari 500g",
+    "image": "Potash Alum Stone - Batu Tawas - Padikaram - Fitkari 500g.jpg",
+    "price": 8.90,
+    "weight": 500,
+    "description": "Can be used as a natural aftershave to soothe and disinfect the skin after shaving.\nHelps to reduce acne and blemishes due to its antibacterial and astringent properties.\nInflammation Reduction. Alum has been used as a natural remedy for canker sores and mouth ulcers due to its healing and antiseptic properties.\n\nGentle Deodorant Solution ,Can be used as a natural deodorant to prevent body odor.\n\nOral Hygiene Elixir: Incorporating it into your dental care regimen can help maintain strong and healthy teeth and gums."
+  },
+  {
+    "id": 22,
+    "name": "Black Organic Rice - Karuppu Kauni Kavuni Arisi",
+    "image": "Black Organic Rice - Karuppu Kauni Kavuni Arisi.jpg",
+    "price": 22.00,
+    "weight": 300,
+    "description": "Indian Black Organic Karuppu Kauni Kavuni Rice, also known as Black Rice, is a nutritious and flavorful variety of rice. It is organically grown and has a unique black color. This rice is rich in antioxidants, vitamins, and minerals, making it a healthy choice for your meals. It has a nutty flavor and a slightly chewy texture, which adds a delightful taste to your dishes. Use it to make delicious rice bowls, salads, stir-fries, and desserts. This pack of Indian Black Organic Karuppu Kauni Kavuni Rice is perfect for those who want to enjoy the goodness of black rice in their everyday meals.\n• Country of Origin:India\t"
+  },
+  {
+    "id": 23,
+    "name": "Yellow Sulfur (Solid Rock) - Belerang Kuning (Ketul) - Kandhagam 500g",
+    "image": "Yellow Sulfur (Solid Rock) - Belerang Kuning (Ketul) - Kandhagam 500g.jpg",
+    "price": 8.50,
+    "weight": 300,
+    "description": "Yellow Sulfur 500g\nBoost plant growth.\nEssential nutrient for plants!\nSulphur is essential for many growth functions in plants including nitrogen metabolism, enzyme activity and protein and oil synthesis.\n\n-Belerang Kuning boleh digunakan untuk menghalang ular"
+  },
+  {
+    "id": 24,
+    "name": "Mookirattai Powder - Punarnava Root Powder 25G",
+    "image": "Mookirattai Powder - Punarnava Root Powder 25G.jpg",
+    "price": 12.00,
+    "weight": 50,
+    "description": "It acts as an analgesic and relieves your pain. It also provides the best solution for skin-related problems such as skin allergies, rashes, and itching. It supports the functioning of the liver and kidneys and facilitates a healthy urinary tract without difficulty."
+  },
+  {
+    "id": 25,
+    "name": "Maruthani ilai leaf - Henna Powder for Cosmetics and Hair Care 50g",
+    "image": "Maruthani ilai leaf - Henna Powder for Cosmetics and Hair Care 50g.jpg",
+    "price": 9.00,
+    "weight": 50,
+    "description": "Maruthani Ilai Powder is a versatile product used in cosmetics, hair dyes, and hair care products. It can also be used as a dye for nails and hands. The powder is known for its wound healing properties, as it helps protect the skin against infections and reduces inflammation. Please note that this product is for external use only.\n• Uses:Cosmetics,Hair care,Nail dye \n• size:50g"
+  },
+  {
+    "id": 26,
+    "name": "Avarampoo Powder- Tanner’s cassia powder 50g",
+    "image": "Avarampoo Powder- Tanner’s cassia powder 50g.jpg",
+    "price": 8.50,
+    "weight": 50,
+    "description": "● Avarampoo or Avaram Senna is a common tree in Asia, which has been widely used in Indian traditional medicine. The tree grows wildly and found abundantly near the river beds. Avaram Senna flower, which is called as Tanner’s cassia is bright yellow in color. The dried flowers and buds have many therapeutic benefits. In Ayurveda, Avaram Senna flower is used for treating diabetes.\n● Its an herb that has the ability to cure diabetes. besides, curing diabetes, it has various other properties that promote overall health. It also aids in maintaining the body temperature when it is consumed as a tea"
+  },
+  {
+    "id": 27,
+    "name": "Vettiver White - Vilamichai Ver - Coleus Vettiveroides Root Powder 50g",
+    "image": "Vettiver White - Vilamichai Ver - Coleus Vettiveroides Root Powder 50g.jpg",
+    "price": 11.50,
+    "weight": 50,
+    "description": "The cooling properties of Vetiver roots make it an excellent simple ingredient to get rid of the excess body heat and tropical summer heat. Its cooling properties help relieve ulcers, a sign of body heat. They help prevent acne, pimples and nourishes the skin internally."
+  },
+  {
+    "id": 28,
+    "name": "Cold Pressed Sesame Oil / Minyak Bijan / Chekku Nallaennai",
+    "image": "Cold Pressed Sesame Oil / Minyak Bijan / Chekku Nallaennai.jpg",
+    "price": 17.80,
+    "weight": 500,
+    "description": "Traditionally made cold pressed Sesame oil.\nSesame oil is an edible vegetable oil derived from sesame seeds. Besides being used as a cooking oil, it is used as a flavor enhancer in many cuisines, having a distinctive nutty aroma and taste.\n\nHelps in lowering of blood pressure\nOil pulling for improving oral health\nHelps in maintaining good skin health\nHelps in detoxification of skin"
+  },
+  {
+    "id": 29,
+    "name": "Karisalankanni Powder - Bhringaraj powder 50g",
+    "image": "Karisalankanni Powder - Bhringaraj powder 50g.jpg",
+    "price": 8.50,
+    "weight": 50,
+    "description": "Karisalankanni is a natural herbal remedy that helps prevent hair fall and premature graying of hair. It also protects and strengthens the liver. This product is made from high-quality ingredients and is suitable for all hair types. Regular use of Karisalankanni can promote healthy hair growth and improve hair texture. Karisalankanni is an excellent liver cleanser and tonic for the liver. \n• size: 50g"
+  },
+  {
+    "id": 30,
+    "name": "Orithal Thamarai Powder 50g",
+    "image": "Orithal Thamarai Powder 50g.jpg",
+    "price": 15.50,
+    "weight": 50,
+    "description": "Orithal Thamarai treats disorders of the nervous system. Acts as a restorative nutrient for the nervous system. Calms and nourishes the nerves. Strengthens the body. Increases the testosterone in males. Promotes Masculinity"
+  },
+  {
+    "id": 31,
+    "name": "Pure Cardamom Powder - Serbuk Buah Pelaga +-20g",
+    "image": "Pure Cardamom Powder - Serbuk Buah Pelaga +-20g.jpg",
+    "price": 10.00,
+    "weight": 50,
+    "description": "Cardamom powder is a versatile spice widely used in sweet dishes, ice creams, milk specialties, and hot masala milk. It adds a delightful flavor and aromatic essence to many rice dishes, vegetables, and other richly-flavored recipes. This traditional spice is also commonly used as a flavoring in coffee and tea. Experience the authentic taste of cardamom with our high-quality cardamom powder.\n• size: +-20g \n• Storage: Store in a cool, dry place"
+  },
+  {
+    "id": 32,
+    "name": "Pure Star Anise Powder - Serbuk Bunga Lawang +-20g",
+    "image": "Pure Star Anise Powder - Serbuk Bunga Lawang +-20g.jpg",
+    "price": 5.50,
+    "weight": 50,
+    "description": "Star anise is a versatile spice that can be used in various ways in the kitchen. It adds a unique flavor and brings out the best in your favorite dishes. Additionally, star anise contains potential health-promoting compounds that can benefit your overall well-being. This product comes in a convenient size of approximately 20g.\n• potential benefits:Health-promoting compounds \n• size:+-20g"
+  },
+  {
+    "id": 33,
+    "name": "Hibiscus Flower Powder - Sembaruthi 50g",
+    "image": "Hibiscus Flower Powder - Sembaruthi 50g.jpg",
+    "price": 10.50,
+    "weight": 50,
+    "description": "The Hair Growth Stimulator is a powerful product that promotes hair growth and prevents premature graying. With its rich amino acid content, it nourishes the hair follicles and stimulates healthy hair growth. Say goodbye to thinning hair and hello to luscious locks with this amazing hair growth solution. Suitable for both men and women, this product is a must-have for anyone looking to improve the health and appearance of their hair."
+  },
+  {
+    "id": 34,
+    "name": "Rose Petal Powder 50g",
+    "image": "Rose Petal Powder 50g.jpg",
+    "price": 10.50,
+    "weight": 50,
+    "description": "Rose petal powder is a versatile skincare product that offers multiple benefits. It helps moisturize the skin, reducing redness and inflammation. The powder also acts as an exfoliant, removing dead skin cells and promoting a brighter complexion. Additionally, it has stress-relieving properties that can help reduce stress and depression. Moreover, it aids in weight loss and can lower blood pressure. This high-quality rose petal powder is a must-have for anyone looking to improve their skin health and overall well-being."
+  },
+  {
+    "id": 35,
+    "name": "Sirukurinjan Powder- Gymnema Sylvestre - Cowplant Powder 50g",
+    "image": "Sirukurinjan Powder- Gymnema Sylvestre - Cowplant Powder 50g.jpg",
+    "price": 7.00,
+    "weight": 50,
+    "description": "Gymnema is a versatile herb used for various purposes. It is commonly used for diabetes, metabolic syndrome, weight loss, and cough. Additionally, it has been found to be effective against malaria and acts as a digestive stimulant, laxative, appetite suppressant, and diuretic. Gymnema can help fight sugar cravings and lower high blood sugar levels. This product is highly beneficial for individuals looking to manage their blood sugar levels and improve overall health."
+  },
+  {
+    "id": 36,
+    "name": "Kuppaimeni Powder - Haritamanjari - Acalypha indica 50g",
+    "image": "Kuppaimeni Powder - Haritamanjari - Acalypha indica 50g.jpg",
+    "price": 9.50,
+    "weight": 50,
+    "description": "Kuppaimeni mostly grows on road sides and also in barren land. However it is having lot of herbal and medicinal properties.\nIts Botanical name is Acalypha Indica.\nLeaves extract of the plant consumed in empty stomach is effective in removing mucus in chest and in esophagus area. The mucus would be removed as vomit or through excretion.It is bitter in taste and having so many anti microbial chemicals. The leaves can be applied as paste to remove pimples and black spots in our skin.\nKuppaimeni powder along with Neem Powder and Aloevera powder can be used to get rid of dandruff and the related hairfall. Kuppaimeni powder along with Kasthuri Manjal Powder mix has been used as a natural hair remover by many women. It also prevents growth of new hair.\nKuppaimeni is a very cold plant. We should avoid consuming Kuppaimeni leaves during winter and rainy season. People living in hill areas should also avoid consuming Kuppaimeni leaves or its extract."
+  },
+  {
+    "id": 37,
+    "name": "Pani Puri Vathal - Keropok - 250g KEROPOK",
+    "image": "Pani Puri Vathal - Keropok - 250g KEROPOK.jpg",
+    "price": 5.60,
+    "weight": 250,
+    "description": "FRYING METHOD:\nHeat the oil approx. 170 - 180 degree Put the pellets inside the frying pan. Fry in the oil for approx. 30-35 sec. Stir continuously. Fry until golden brown."
+  },
+  {
+    "id": 38,
+    "name": "Chilli Flakes - Cili Kasar 100g",
+    "image": "Chilli Flakes - Cili Kasar 100g.jpg",
+    "price": 5.90,
+    "weight": 100,
+    "description": "Chilli Flakes\nSpice up your meals!"
+  },
+  {
+    "id": 39,
+    "name": "Serbuk Cengkih - Pure Cloves Powder - Kirambu +-20g",
+    "image": "Serbuk Cengkih - Pure Cloves Powder - Kirambu +-20g.jpg",
+    "price": 4.90,
+    "weight": 30,
+    "description": "100% pure powder without any mixture. Cloves can be used whole or ground. You might include ground cloves in spice mixes and whole cloves in recipes to add depth and flavor to a wide variety of foods. These small dark brown pods are used in curries, seasoned meats, baked goods, and more. They have a strong, warm, and slightly sweet flavor that pairs well with both sweet and savory dishes. Cloves are also known for their aromatic properties and are often used in homemade scented candles. Buy our high-quality cloves to enhance the taste and aroma of your favorite dishes.\n• Usage:Spice mixes,Recipes \n• Size: +-20g"
+  },
+  {
+    "id": 40,
+    "name": "Kalarchikai powder - Herbs - Serbuk Buah gorek - Caesalpinia bonducella 100g",
+    "image": "Kalarchikai powder - Herbs - Serbuk Buah gorek - Caesalpinia bonducella 100g.jpg",
+    "price": 32.00,
+    "weight": 100,
+    "description": "• Kalachikai has many health benefits such as treating Polycystic ovary syndrome (PCOS). \n• It purifies blood, regulated blood sugar levels, anti-bacterial, anti-septic, anti-fungal, anti-viral, anti-spasmodic and anti-rheumatic"
+  },
+  {
+    "id": 41,
+    "name": "Panneer Poo - Dried Indian Rennet Flower - Pannir 100g",
+    "image": "Panneer Poo - Dried Indian Rennet Flower - Pannir 100g.jpg",
+    "price": 8.00,
+    "weight": 100,
+    "description": "Panner Ka Phool is known to have medicinal properties and is great for diabetics. In addition, it not just utilizes the blood glucose but also repairs the beta cells of the pancreas. It promotes the secretion of insulin in the right amount."
+  },
+  {
+    "id": 42,
+    "name": "Marutham Pattai Powder - Terminalia Arjuna Dried Bark Powder 50g",
+    "image": "Marutham Pattai Powder - Terminalia Arjuna Dried Bark Powder 50g.jpg",
+    "price": 8.00,
+    "weight": 50,
+    "description": "Here are a few of arjuna's remarkable benefits when it comes to promoting cardiovascular wellness:\n- Strong heart function and healthy circulation. Arjuna strengthens and tones the circulatory system, rejuvenates the soft tissues, and promotes proper function of the heart muscle.\n- Healthy flow of blood. Arjuna's properties support the maintenance of healthy cholesterol levels already within the normal range, balanced blood pressure, and proper coagulation in the blood.\n- Emotional wellness. Arjuna has also been traditionally used to support the emotional heart, promoting balance for those experiencing grief and sadness. It is said to give courage, strengthen the will, and fortify the heart"
+  },
+  {
+    "id": 43,
+    "name": "Rose Buds Flower Dried 80G",
+    "image": "Rose Buds Flower Dried 80G.jpg",
+    "price": 9.95,
+    "weight": 100,
+    "description": "- 100% Natural & Brand New Makes Immune System Stronger\n- Helps to reduce stress, depression Helps To Lose Weight & Lower blood pressure."
+  },
+  {
+    "id": 44,
+    "name": "Akar Seruntun Kering - Akar patawali Kering - Tinospora crispa 50g",
+    "image": "Akar Seruntun Kering - Akar patawali Kering - Tinospora crispa 50g.jpg",
+    "price": 7.00,
+    "weight": 50,
+    "description": "- Pokok Patawali atau dikenali juga dengan nama Akar Seruntun atau Akar Patawali atau nama saintifiknya Tinospora crispa \n \t dari famili Menispermaceae merupakan tanaman menjalar berbatang berkerutu dan berdaun lebar seperti daun sirih.\n- Ada sesetengah orang kampung menggunakan akar seruntun untuk memisahkan anak dengan botol susu atau susu dada. Caranya, sapukan keratan pokok ini ke puting botol susu atau puting buah dada ibu. Rasa pahit pokok tersebut membuatkan kanak-kanak serik untuk hisap botol atau nak menyusu lagi\n \t-Ada yang percaya rasa pahit daripada akar ini membuatkan darah menjadi pahit lalu menyebabkan gigitan nyamuk semakin berkurangan bila diminum air yang dimasak \t dengan akar ini.\n- Digunakan untuk merawat tekanan darah tinggi, kencing manis, merawat penyakit kelamin, sakit perut, demam, demam malaria , menurunkan suhu panas, sakit pinggang, sengal-sengal dan masalah cacing bagi kanak-kanak."
+  },
+  {
+    "id": 45,
+    "name": "Serbuk Jintan Putih - Cumin Powder 100g",
+    "image": "Serbuk Jintan Putih - Cumin Powder 100g.jpg",
+    "price": 4.50,
+    "weight": 100,
+    "description": "Uses: Cumin seed is used as a spice for its distinctive flavour and aroma. Cumin can be used ground or as whole seeds. It helps to add an earthy and warming feeling to food."
+  },
+  {
+    "id": 46,
+    "name": "White Kunguliyam - Sambarani - Kemenyan - Frankincense 100g",
+    "image": "White Kunguliyam - Sambarani - Kemenyan - Frankincense 100g.jpg",
+    "price": 7.90,
+    "weight": 100,
+    "description": "Usage/Kegunaan-Incense Sticks/Kemenyan-Veterinary Medicine-Scented Candles-Purifies air\n- In traditional medicine, Frankincense (Boswellia Species) is believed to improve learning and memory on consumption.\n-Sweet Woody Odor however perception of scent is a highly individualistic.\n\nReady to be burned over charcoal, or be ground and used in various incense / herbal mixtures of your own making."
+  },
+  {
+    "id": 47,
+    "name": "Veppam Pattai - Neem Bark Dried 150g",
+    "image": "Veppam Pattai - Neem Bark Dried 150g.jpg",
+    "price": 12.00,
+    "weight": 150,
+    "description": "-Neem tree is widely famous in India as well as abroad for its medicinal purposes. It is a herb type, belongs to the Meliaceae family, commonly available all through year everywhere in India. \n-It is very beneficial to the health because of its natural ability as an anti-viral, anti-bacterial, anti-microbial, anti-parasitic, anti-fungal, analgesic, anti-inflammatory, and so many properties. Because of its wide variety of applications. The Neem bark has cool, bitter, and astringent properties.\n\n\nBenefits of Veppam Pattai / Neem Bark Dried ( Raw ):\n-It is traditionally used to treat tiredness, Kapha dosha imbalance, worms, fever and loss of appetite.\n-Neem bark can be used to treat various body infections and help to kill bacteria on the skin that cause severe skin \n \t infections such as acne and infected wounds.\n-Good remedy for teeth problems.\n-The bark powder can be made into an oil that will quickly absorb into the skin, Neem bark oil can also be used on aggravating or recurrent skin conditions such as eczema, psoriasis, ring worm and even warts."
+  },
+  {
+    "id": 48,
+    "name": "Marikolunthu Dried Leaves - Marjoram Leaf 100g",
+    "image": "Marikolunthu Dried Leaves - Marjoram Leaf 100g.jpg",
+    "price": 15.00,
+    "weight": 100,
+    "description": "Marikolunthu is a herb in the mint family, Marjoram is linked to several benefits, such as reduced inflammation, improved digestive health, and menstrual regulation,herb that is 1-2 ft long, and it has a 2.5 cm long leaves that are wonderful."
+  },
+  {
+    "id": 49,
+    "name": "Thulasi Powder - Serbuk Daun Tulsi - 100g",
+    "image": "Thulasi Powder - Serbuk Daun Tulsi - 100g.jpg",
+    "price": 14.00,
+    "weight": 100,
+    "description": "The multi properties of Tulsi Powder helps improve body’s immunity & support respiratory health.\nThis tulsi powder for face is also recommended for skin health & in treatment of acne.\nThe antioxidant activity of Ocimum sanctum Churana may support the body’s natural response to oxidative stress.\nTulsi is also used as basil leaves powder for hair and face & Tulsi powder for tea"
+  },
+  {
+    "id": 50,
+    "name": "Avuri (Indigofera Tinctoria) Powder 50g",
+    "image": "Avuri (Indigofera Tinctoria) Powder 50g.jpg",
+    "price": 8.50,
+    "weight": 50,
+    "description": "This hair growth oil is formulated with a key active ingredient that promotes new hair growth, adds thickness to hair, and conditions dry hair. Regular application of this oil will result in healthier and more lustrous hair. Suitable for all hair types. For External Use Only.\n• size: 50g"
+  },
+  {
+    "id": 51,
+    "name": "Karuvelam Pattai - Babul Bark - Mesquite Bark Dried 150g",
+    "image": "Karuvelam Pattai - Babul Bark - Mesquite Bark Dried 150g.jpg",
+    "price": 8.00,
+    "weight": 150,
+    "description": "External Benefits\n• Karuvelam for problems with the teeth and gums \n• Babul bark is beneficial for teeth and gum problems \n• Antimicrobial activity that results in a decrease in oral issues \n• Reduces plaque development and irritation of the gingiva (inflammation of the gums ) \n• Increases the alkalinity of saliva, or the pH of saliva, which helps protect teeth from cavities and decay. \n• Prevents cavities and swelling of the gums \n• Infection of the eye Redness. \n• It was utilised in the preparation of Nightfall \n• It is used to treat Spermatorrhoea, decreased sperm viscosity, frequent nocturnal discharges, and premature ejaculation."
+  },
+  {
+    "id": 52,
+    "name": "Bunga Mukmin - Ratu Pari - Bombax ceiba - Mullilavu 100gm",
+    "image": "Bunga Mukmin - Ratu Pari - Bombax ceiba - Mullilavu 100gm.jpg",
+    "price": 5.00,
+    "weight": 100,
+    "description": "-Health Benefits of Bombax Ceiba\n \t 1.Helpful in loose motions and diarrhea\n \t 2. For Mouth Blisters and Wounds\n \t 3. Beneficial in bleeding hemorrhoids\n \t 4. Beneficial in leucorrhea \n-khasiat bunga ratu pari/bunga mukmin:\nDarah tinggi -Kencing Manis -lelah -Gaut -memecah lemak-buasir-Mengembalikan tenaga setelah penat bekerja-Lenguh-lenguh sendi. Membantu membuang toksid dalam badan wanita lepas bersalin.\n\ncara guna:rendamkan Bunga Ratu Pari kedalam air panas selama 20 minit."
+  },
+  {
+    "id": 53,
+    "name": "Marutham Pattai - Terminalia Arjuna Dried Bark 150g",
+    "image": "Marutham Pattai - Terminalia Arjuna Dried Bark 150g.jpg",
+    "price": 15.00,
+    "weight": 150,
+    "description": "Here are a few of arjuna's remarkable benefits when it comes to promoting cardiovascular wellness:\n- Strong heart function and healthy circulation. Arjuna strengthens and tones the circulatory system, rejuvenates the soft \n \ttissues, and promotes proper function of the heart muscle.\n- Healthy flow of blood. Arjuna's properties support the maintenance of healthy cholesterol levels already within the normal \n \trange, balanced blood pressure, and proper coagulation in the blood.\n- Emotional wellness. Arjuna has also been traditionally used to support the emotional heart, promoting balance for those \n \texperiencing grief and sadness. It is said to give courage, strengthen the will, and fortify the heart to accomplish our goals."
+  },
+  {
+    "id": 54,
+    "name": "Bush Color colour - Yellow",
+    "image": "Bush Color colour - Yellow.jpg",
+    "price": 5.60,
+    "weight": 250,
+    "description": "- Best before 24 months from date of manufacture\n- Store in a cool, dry place, away from sunlight"
+  },
+  {
+    "id": 55,
+    "name": "Lemuju - Omam - Carom - Ajwain Seeds 250G",
+    "image": "Lemuju - Omam - Carom - Ajwain Seeds 250G.jpg",
+    "price": 6.00,
+    "weight": 50,
+    "description": "Active enzymes in ajwainimprove the flow of stomach acids, which can help to relieve indigestion, bloating, and gas. The plant can also help to treat peptic ulcers as well as sores in the esophagus, stomach, and intestines"
+  },
+  {
+    "id": 56,
+    "name": "Vembalam Pattai - Ratanjot - Alkanet Root 50g",
+    "image": "Vembalam Pattai - Ratanjot - Alkanet Root 50g.jpg",
+    "price": 9.50,
+    "weight": 50,
+    "description": "This herb, when used with oil, helps arrest hair fall, baldness and premature greying."
+  },
+  {
+    "id": 57,
+    "name": "Biji Halim - Saliya Vithai - Biji Selasih Merah - Cress seeds 100g",
+    "image": "Biji Halim - Saliya Vithai - Biji Selasih Merah - Cress seeds 100g.jpg",
+    "price": 8.50,
+    "weight": 100,
+    "description": "InternalBenefits of Saliaya Seeds\nIt helps treat anemiaIt enhances breast milk productionIt helps to regulate menstruationIt is beneficial for weight lossboost immunity \nHow to consumeSaliaya Seeds Internally:-\nSoak one tablespoon of the seeds in water overnight and then consume with water / Milk"
+  },
+  {
+    "id": 58,
+    "name": "Hibiscus - Sembaruthi Dry Flower - Bunga Raya 100g",
+    "image": "Hibiscus - Sembaruthi Dry Flower - Bunga Raya 100g.jpg",
+    "price": 10.00,
+    "weight": 100,
+    "description": "• Being rich in amino acids, it stimulates hair growth and prevents premature graying. \n• Along with skin and hair, Hibiscus is used in the management ofhypertensionto maintain blood pressure."
+  },
+  {
+    "id": 59,
+    "name": "Nilapana Kilangu - Black Musli - Curculigo Orchioides - 100g",
+    "image": "Nilapana Kilangu - Black Musli - Curculigo Orchioides - 100g.jpg",
+    "price": 15.00,
+    "weight": 100,
+    "description": "It can be beneficial to a lot of health issues—ranging from treating skin diseases to treating serious respiratory problems."
+  },
+  {
+    "id": 60,
+    "name": "Kulit Serapat.kayu serapat - Paal Pattai 100gm",
+    "image": "Kulit Serapat.kayu serapat - Paal Pattai 100gm.jpg",
+    "price": 8.00,
+    "weight": 100,
+    "description": "Menghalus dan mencantikkan kulit. \n Membantu melancarkan peredaran darah untuk meningkatkan kadar oksigen.\n Menyingkirkan toksid dalam badan. \n Meningkatkan fungsi organ dan tahap kesihatan wanita."
+  },
+  {
+    "id": 61,
+    "name": "Tamarai kilangu - Dried Lotus Root - Akar Teratai Kering 200g",
+    "image": "Tamarai kilangu - Dried Lotus Root - Akar Teratai Kering 200g.jpg",
+    "price": 12.00,
+    "weight": 200,
+    "description": "Eating lotus root includes reduction in cholesterol, improves digestion, helps to lower blood pressure and also helps to boost the immunity system. Lotus root also helps  balances your mood, helps to relieve depression and also helps to maintain the proper enzymatic activity in your body."
+  },
+  {
+    "id": 62,
+    "name": "Akar Sintuk - Akar Beluru - 2 ikat",
+    "image": "Akar Sintuk - Akar Beluru - 2 ikat.jpg",
+    "price": 2.20,
+    "weight": 50,
+    "description": "-Akar sintok terkenal sebagai syampu rambut. Ia menghilangkan kelemumur dan menjadikan rambut hitam berkilat.\n-Akar sintok turut digunakan dalam mandian jenazah selain daun bidara."
+  },
+  {
+    "id": 63,
+    "name": "Kas Kas Seed Poppy Seeds 100g",
+    "image": "Kas Kas Seed Poppy Seeds 100g.jpg",
+    "price": 4.95,
+    "weight": 100,
+    "description": " Kas Kas Seed Poppy Seeds 100g"
+  },
+  {
+    "id": 64,
+    "name": "Dried Seenthil Kodi - Guduchi - Giloy 100g",
+    "image": "Dried Seenthil Kodi - Guduchi - Giloy 100g.jpg",
+    "price": 10.00,
+    "weight": 100,
+    "description": "Guduchi in your diet can improve your immunity. It is full of antioxidants and helps to release toxins from the body. It juice also detoxifies your skin and improve your skin. Giloy is also used for liver diseases, urinary tract infections, and heart-related issues"
+  },
+  {
+    "id": 65,
+    "name": "Fennel Seed Powder -Serbuk Jintan Manis - 100gm",
+    "image": "Fennel Seed Powder -Serbuk Jintan Manis - 100gm.jpg",
+    "price": 4.00,
+    "weight": 100,
+    "description": "Fennel seed is a highly aromatic and flavourful herb. The seeds are pale greenish in colour and have a faintly sweet and refreshing flavour."
+  },
+  {
+    "id": 66,
+    "name": "Akar Angin - Tahi Angin 50g",
+    "image": "Akar Angin - Tahi Angin 50g.jpg",
+    "price": 6.20,
+    "weight": 50,
+    "description": "khasiat: \nMencegah bakteria dalam badan \nBaik untuk saluran pundi kencing\nMembantu saluran pernafasan \nMenambahkan tenaga \nMemperbaiki otot yang sakit \nRamuan membuat minyak urut dan mandian herba\nMengatasi cirit birit"
+  },
+  {
+    "id": 67,
+    "name": "Serbuk Kas Kas - Poppy_Seeds Powder100g",
+    "image": "Serbuk Kas Kas - Poppy_Seeds Powder100g.jpg",
+    "price": 4.95,
+    "weight": 50,
+    "description": "Kas Kas Seed Poppy Seeds 100g"
+  },
+  {
+    "id": 68,
+    "name": "Jadam - Kariapalam -Aloe Vera resin 100g",
+    "image": "Jadam - Kariapalam -Aloe Vera resin 100g.jpg",
+    "price": 4.80,
+    "weight": 100,
+    "description": "JADAM terkenal dengan kemampuannya untuk menyembuhkan segala penyakit. ia mampu mengubati darah tinggi, kencing manis, sakit gigi, menghilangkan bau badan dan bau mulut serta pelbagai lagi.\n\n-It is a hardened, dark substance which is used to treat externally burns, festering boils and skin eruptions. It is an extremely bitter natural extract, and in some cultures is used for weaning babies from breast-milk."
+  },
+  {
+    "id": 69,
+    "name": "Neermulli Vithai - Biji maarof - Marsh Barbel - Hygrophila auriculata - Kokilaksha Seed 100g",
+    "image": "Neermulli Vithai - Biji maarof - Marsh Barbel - Hygrophila auriculata - Kokilaksha Seed 100g.jpg",
+    "price": 8.00,
+    "weight": 100,
+    "description": "Neermulli seed is rich in vitamin E, iron, proteins etc. It helps increase the vitality in men and women. Increases red blood cells. It acts as renal tonic, diuretic, detoxifier, kidney stone breaker, reduce dry skin, and body heat."
+  },
+  {
+    "id": 70,
+    "name": "Mahilam poo - Magilam Poo Dried - 100g",
+    "image": "Mahilam poo - Magilam Poo Dried - 100g.jpg",
+    "price": 7.50,
+    "weight": 100,
+    "description": "Magilam Poo is the small tree of the Indian subcontinent. Its Leaves are small, shiny, thick, narrow &amp; straight trunk and spreading branches. Flowers are small, star-shaped, yellowish white in colour, with a crown rising from the centre."
+  },
+  {
+    "id": 71,
+    "name": "Halia Bara Kering ASLI 100g",
+    "image": "Halia Bara Kering ASLI 100g.jpg",
+    "price": 8.00,
+    "weight": 100,
+    "description": "Khasiat halia bara adalah seperti berikut:\n Melembutkan perut\n Membantu penghadaman makanan\n Mengeluarkan angin dari dalam tubuh\n Merawat kesan gatal gigitan serangga \n Melegakan demam\n Merawat resdung\n Mengurangkan sengal-sengal sendi Tenaga batin\n Rawatan selepas bersalin"
+  },
+  {
+    "id": 72,
+    "name": "Marathi moggu - kapok buds 30g",
+    "image": "Marathi moggu - kapok buds 30g.jpg",
+    "price": 5.00,
+    "weight": 50,
+    "description": "It looks like a large sized clove, has a strong aroma and tastes like a cross between black pepper and mustard. Lightly frying it in oil helps release its flavour to use in a range of recipes from curries to rice preparations."
+  },
+  {
+    "id": 73,
+    "name": "Jatamansi Root - Balchar -Spikenard 50g",
+    "image": "Jatamansi Root - Balchar -Spikenard 50g.jpg",
+    "price": 18.00,
+    "weight": 50,
+    "description": "It acts as a brain tonic and helps to improve memory and brain functions."
+  },
+  {
+    "id": 74,
+    "name": "Zigma karunai kilangu Lehyam 125g",
+    "image": "Zigma karunai kilangu Lehyam 125g.jpg",
+    "price": 35.00,
+    "weight": 130,
+    "description": "Hemorrhoids, Fistula, Fissure, Burning & Pricking Pain in Anus and Bleeding Piles. Karunai Legiyam is the Ultimate Choice in the Treatment of Piles. It Relieves Constipation, Normalizes bowel habit and stops bleeding from the Anus. It Gives Good Relief From Pain.\n\nManufactured by Zigma Herbal Remedies (India) Pvt.Ltd\n\nGMP, ISO 9001 : 2015 & Halal Certified Company\n\nDosage : 5 to 10 g with warm water after food twice daily or as directed by the physician."
+  },
+  {
+    "id": 75,
+    "name": "Pinju Kadukkai - Buah Langkau - Small Inknut 200g",
+    "image": "Pinju Kadukkai - Buah Langkau - Small Inknut 200g.jpg",
+    "price": 12.00,
+    "weight": 200,
+    "description": "Kadukkai is known to cure all stomach related problems from acidity and indigestion to constipation very effectively. Kadukkai increases the mucus production in the stomach forming a protective barrier thus preventing acidity and ulcer."
+  },
+  {
+    "id": 76,
+    "name": "Foxtail Millet 500g Thinai rice",
+    "image": "Foxtail Millet 500g Thinai rice.jpg",
+    "price": 8.30,
+    "weight": 500,
+    "description": "Benefits of Foxtail Millets:\n\n- Source of dietary fibre\n- High in nutrition:\n- Less calorie count:\n- Improves immunity:\n- Satiates Hunger:\n- Reduces Sugar-levels :\n- Aids heart problems:"
+  },
+  {
+    "id": 77,
+    "name": "Veppam Kottai neem Dried Seeds 100g",
+    "image": "Veppam Kottai neem Dried Seeds 100g.jpg",
+    "price": 10.00,
+    "weight": 100,
+    "description": "Neem Dried Seeds antiseptic, antiviral, antipyretic, anti-inflammatory, anti-ulcer and antifungal uses."
+  },
+  {
+    "id": 78,
+    "name": "Ethnic Kodo Millet 500g Varagu rice",
+    "image": "Ethnic Kodo Millet 500g Varagu rice.jpg",
+    "price": 8.30,
+    "weight": null,
+    "description": "Benefits of Ethnic Millets:\n\n- Source of dietary fibre\n- High in nutrition:\n- Less calorie count:\n- Improves immunity:\n- Satiates Hunger:\n- Reduces Sugar-levels :\n- Aids heart problems:"
+  },
+  {
+    "id": 79,
+    "name": "Thetran kai - Clearing Nut 100g",
+    "image": "Thetran kai - Clearing Nut 100g.jpg",
+    "price": 14.50,
+    "weight": null,
+    "description": "- Thetran Kottai(Clearing Nut) is used to cure indigestion, diarrhea, eye-related disorders, difficulty in micturition, external wounds, skin damages, renal calculi, and it assists to control the blood sugar level.\n\nClearing Nut, native to the temperate regions of India, belongs t"
+  }
+]
     ];
 
     const container = document.getElementById('productContainer');
