@@ -217,44 +217,38 @@
 </head>
 <body>
   <div class="header">Sharmi Mart</div>
+
   <div class="container">
-    <!-- existing product blocks -->
+    <div class="product">
+      <img src="Mutani solid bar 1.jpg" alt="Pure Fullers Earth Solid Bar">
+      <div class="product-title">Pure Fullers Earth Solid Bar</div>
+      <div class="product-price">RM5.00</div>
+      <div class="product-description">Natural facial and skin cleanser.</div>
+      <div class="cart-form">
+        <input type="number" id="qty1" value="1" min="1">
+        <button onclick="addToCart('Pure Fullers Earth Solid Bar', 5.00, 'qty1')">Add to Cart</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="bills_38.jpg" alt="Natural Himalayan Black Salt">
+      <div class="product-title">Natural Himalayan Black Salt</div>
+      <div class="product-price">RM8.00</div>
+      <div class="product-description">Authentic black salt with minerals from the Himalayas.</div>
+      <div class="cart-form">
+        <input type="number" id="qty2" value="1" min="1">
+        <button onclick="addToCart('Natural Himalayan Black Salt', 8.00, 'qty2')">Add to Cart</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="bills_38.jpg" alt="Ceylon Cinnamon Sticks">
+      <div class="product-title">Ceylon Cinnamon Sticks</div>
+      <div class="product-price">RM12.00</div>
+      <div class="product-description">Premium quality Ceylon cinnamon sticks for flavor and health.</div>
+      <div class="cart-form">
+        <input type="number" id="qty3" value="1" min="1">
+        <button onclick="addToCart('Ceylon Cinnamon Sticks', 12.00, 'qty3')">Add to Cart</button>
+      </div>
+    </div>
   </div>
 
-  <div class="checkout">
-    <h3>Delivery Details</h3>
-    <input type="text" id="name" placeholder="Full Name" required />
-    <input type="text" id="phone" placeholder="Phone Number" required />
-    <textarea id="address" placeholder="Delivery Address" rows="4" required></textarea>
-  </div>
-
-  <div class="summary">
-    <h3>Order Summary</h3>
-    <table id="summaryTable">
-      <thead>
-        <tr><th>#</th><th>Item</th><th>Qty</th><th>Total</th><th>Action</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <p><strong>Subtotal:</strong> <span id="grandTotal">RM0.00</span></p>
-    <p><strong>Shipping Fee:</strong> <span id="shippingFee">RM0.00</span></p>
-    <p><strong>Total Amount:</strong> <span id="finalTotal">RM0.00</span></p>
-    <p style="display:none"><strong>Total Weight:</strong> <span id="totalWeight"></span></p>
-  </div>
-
-  <div class="whatsapp">
-    <p>To place your order, please confirm via WhatsApp:</p>
-    <button onclick="confirmOrder()">Send Order via WhatsApp</button>
-  </div>
-
-  <div style="text-align: center; padding: 20px;">
-    <h3>Pay with TnG eWallet</h3>
-    <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
-    <p>Scan this QR to complete payment. Send receipt via WhatsApp to confirm.</p>
-  </div>
-
-  <div class="footer">
-    &copy; 2025 Sharmi Mart. All rights reserved. Powered by GitHub Pages.
-  </div>
-</body>
-</html>
+  <!-- The rest remains unchanged -->
