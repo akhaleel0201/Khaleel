@@ -11,6 +11,15 @@
       margin: 0;
       padding: 0;
     }
+    #searchBar {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 10px;
+  z-index: 1000;
+  border-bottom: 1px solid #ccc;
+}
+
     .header {
       background-color: #f8f8f8;
       padding: 20px;
@@ -111,7 +120,8 @@
 </head>
 <body>
   <div class="header">Khaleel Mart</div>
-<div style="text-align:center; padding: 10px;">
+<div id="searchBar; style="text-align:center; padding: 10px;">
+  
   <input type="text" id="searchInput" placeholder="Search product..." />
   <button onclick="searchProduct()">Search</button>
 </div>
