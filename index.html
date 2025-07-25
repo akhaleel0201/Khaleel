@@ -111,9 +111,10 @@
 </head>
 <body>
   <div class="header">Sharmi Mart</div>
-<input type="text" id="searchInput" placeholder="Search product..." />
-<button onclick="searchProduct()">Search</button>
-
+<div style="text-align:center; padding: 10px;">
+  <input type="text" id="searchInput" placeholder="Search product..." />
+  <button onclick="searchProduct()">Search</button>
+</div>
   <div class="container" id="productContainer"></div>
 
   <div class="summary">
@@ -153,9 +154,6 @@
   <div class="footer">
     &copy; 2025 Sharmi Mart. All rights reserved.
   </div>
-
-  <input type="text" id="searchInput" placeholder="Search product..." />
-<button onclick="searchProduct()">Search</button>
 
   <script>
     const products = [
@@ -889,14 +887,15 @@
     renderProducts();
 
   function searchProduct() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const products = document.querySelectorAll('.product');
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const products = document.querySelectorAll('.product');
 
-    products.forEach(product => {
-    const name = products.querySelector('.product-name').textContent.toLowerCase();
-    products.style.display = name.includes(query) ? '' : 'none';
-      });
-    }
+  products.forEach(product => {
+    const name = product.querySelector('.product-title').textContent.toLowerCase();
+    product.style.display = name.includes(query) ? '' : 'none';
+  });
+}
+
   </script>
 </body>
 </html>
