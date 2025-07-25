@@ -893,8 +893,8 @@
     const products = document.querySelectorAll('.product');
 
     products.forEach(product => {
-    const name = product.querySelector('.product-name').textContent.toLowerCase();
-    product.style.display = name.includes(query) ? '' : 'none';
+    const name = products.querySelector('.product-name').textContent.toLowerCase();
+    products.style.display = name.includes(query) ? '' : 'none';
       });
     }
   </script>
