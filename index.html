@@ -152,6 +152,9 @@
     &copy; 2025 Sharmi Mart. All rights reserved.
   </div>
 
+  <input type="text" id="searchInput" placeholder="Search product..." />
+<button onclick="searchProduct()">Search</button>
+
   <script>
     const products = [
   {
@@ -882,6 +885,16 @@
     }
 
     renderProducts();
+
+  function searchProduct() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const products = document.querySelectorAll('.product');
+
+    products.forEach(product => {
+    const name = product.querySelector('.product-name').textContent.toLowerCase();
+    product.style.display = name.includes(query) ? '' : 'none';
+      });
+    }
   </script>
 </body>
 </html>
