@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +13,22 @@
       padding: 0;
     }
     #searchBar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background: white;
+  left: 0;
+  width: 100%;
+  z-index: 999;
   padding: 10px;
-  z-index: 1000;
-  border-bottom: 1px solid #ccc;
+  }
+#searchBar input {
+  background-color:#ccc; /* Light black input background */
+  color: red;             /* Red text inside input */
+  border: 1px solid #555; /* Optional: to improve contrast */
+}
+
+
+body {
+  padding-top: 60px; /* prevent overlap with fixed bar */
 }
 
     .header {
@@ -34,10 +45,11 @@
       gap: 20px;
       padding: 20px;
     }
+
     .product {
       border: 1px solid #ddd;
       padding: 10px;
-      width: 250px;
+      width: 140px;
     }
     .product img {
       width: 100%;
@@ -120,6 +132,7 @@
 </head>
 <body>
   <div class="header">Khaleel Mart</div>
+
 <div id="searchBar"; style="text-align:center; padding: 10px;">
   
   <input type="text" id="searchInput" placeholder="Search product..." />
@@ -168,9 +181,17 @@
   <script>
     const products = [
   {
+    id: 152,
+    name: "Organic Pure Ceylon Cinnamon Sticks,NOT CASSIA 50g",
+    image: "pic/ceylon cinnamon.jpg",
+    price: 13.90,
+    weight: 50,
+    description: "Weight 50g (Net weight)\n2 to 3 inch long sticks\nGred C5 special\nCeylon Cinnamon sticks are soft\nLight-yellowish brown color and a highly fragrant aroma,\nRolled multiple thin strips of cinnamon bark\nAdd to curries or flavor rice even Tea"
+  },
+  {
     id: 1,
     name: "Maasi Karuvadu - Maldivian Dried Tuna Fish",
-    image: "maasi.jpg",
+    image: "pic/maasi.jpg",
     price: 10.00,
     weight: 50,
     description: "This is Maldives tuna, sustainably sourced and expertly dried. Its high protein content make it an ideal source of nutrition. Enjoy its delicious flavor and crunchy texture in a variety of recipes. Perfect for adding authentic taste to your dishes."
@@ -178,7 +199,7 @@
   {
     id: 2,
     name: "Nilapana Kilangu Powder - Black Musli Powder - Curculigo Orchioides - 50g",
-    image: "Nilapana Kilangu Powder - Black Musli Powder - Curculigo Orchioides - 50g.jpg",
+    image: "pic/nilapana kilangu pow.jpg",
     price: 10.00,
     weight: 50,
     description: "What are the health benefits of nilapanai kilangu? \nIt is said to be a restorative tonic that can cure weakness.\nIt is also said to be an aphrodisiac that can help with impotence, and low sperm count.\nIt is said to help with general body weakness, loss of stamina, and weight gain.\nIt is also said to help with itches and skin diseases."
@@ -186,7 +207,7 @@
   {
     id: 3,
     name: "Cold Pressed Groundnut oil / Minyak Kacang Tanah 500ml",
-    image: "Cold Pressed Groundnut oil / Minyak Kacang Tanah 500ml.jpg",
+    image: "pic/groundnut.jpg",
     price: 15.50,
     weight: 500,
     description: "cold pressed Groundnut oil is manufactured and processed through a traditional way in order to avoid heat while extracting oil. Preventing heat is to avoid the change of natural fat to trans-fat and thus makes it better for health."
@@ -194,7 +215,7 @@
   {
     id: 4,
     name: "Naayuruvi Vithai Seeds Powder - Chaff Flower - Achyranthes Aspera 50g",
-    image: "Naayuruvi Vithai Seeds Powder - Chaff Flower - Achyranthes Aspera 50g.jpg",
+    image: "pic/nayurivi 3.jpg",
     price: 8.50,
     weight: 500,
     description: "-Helps in digestion\n-Laxative and constipation\n-Relief from piles"
@@ -202,7 +223,7 @@
   {
     id: 5,
     name: "Amukkara Powder - Ashwagandha Root Powder 100g",
-    image: "Amukkara Powder - Ashwagandha Root Powder 100g.jpg",
+    image: "pic/amukkara.jpg",
     price: 17.50,
     weight: 100,
     description: "• 100g per bottle \n• Amukkara Kizhangu powder is used for the treatment of rheumatic disorders \n• Insomnia (sleeplessness) \n• male infertility due to oligospermia (low count)."
@@ -314,7 +335,7 @@
   {
     id: 19,
     name: "Arugampul Powder - BermudaGrass Powder 50G",
-    image: "Arugampul Powder - BermudaGrass Powder 50G.jpg",
+    image: "pic/arugampul powder.jpg",
     price: 9.50,
     weight: 50,
     description: "This grass is packed with nutrients like chlorophyll, antioxidants, vitamins, and minerals, which offer powerful detoxifying effects.\nIt is commonly used to cleanse the body of toxins, boost immunity, and improve digestion. Regular consumption of Bermuda grass powder can enhance energy levels and support overall wellness.\nAdditionally, Bermuda grass is beneficial for skincare, helping to improve skin tone and reduce inflammation, while also promoting healthy hair growth when used as a mask or in hair oil. It has been used to regulate blood sugar levels, making it a traditional remedy for managing diabetes."
@@ -370,7 +391,7 @@
   {
     id: 26,
     name: "Avarampoo Powder- Tanner’s cassia powder 50g",
-    image: "Avarampoo Powder- Tanner’s cassia powder 50g.jpg",
+    image: "pic/avarampoo5.jpg",
     price: 8.50,
     weight: 50,
     description: "● Avarampoo or Avaram Senna is a common tree in Asia, which has been widely used in Indian traditional medicine. The tree grows wildly and found abundantly near the river beds. Avaram Senna flower, which is called as Tanner’s cassia is bright yellow in color. The dried flowers and buds have many therapeutic benefits. In Ayurveda, Avaram Senna flower is used for treating diabetes.\n● Its an herb that has the ability to cure diabetes. besides, curing diabetes, it has various other properties that promote overall health. It also aids in maintaining the body temperature when it is consumed as a tea"
@@ -538,7 +559,7 @@
   {
     id: 47,
     name: "Veppam Pattai - Neem Bark Dried 150g",
-    image: "Veppam Pattai - Neem Bark Dried 150g.jpg",
+    image: "pic/neem bark.jpg",
     price: 12.00,
     weight: 150,
     description: "-Neem tree is widely famous in India as well as abroad for its medicinal purposes. It is a herb type, belongs to the Meliaceae family, commonly available all through year everywhere in India. \n-It is very beneficial to the health because of its natural ability as an anti-viral, anti-bacterial, anti-microbial, anti-parasitic, anti-fungal, analgesic, anti-inflammatory, and so many properties. Because of its wide variety of applications. The Neem bark has cool, bitter, and astringent properties.\n\n\nBenefits of Veppam Pattai / Neem Bark Dried ( Raw ):\n-It is traditionally used to treat tiredness, Kapha dosha imbalance, worms, fever and loss of appetite.\n-Neem bark can be used to treat various body infections and help to kill bacteria on the skin that cause severe skin \n \t infections such as acne and infected wounds.\n-Good remedy for teeth problems.\n-The bark powder can be made into an oil that will quickly absorb into the skin, Neem bark oil can also be used on aggravating or recurrent skin conditions such as eczema, psoriasis, ring worm and even warts."
@@ -562,7 +583,7 @@
   {
     id: 50,
     name: "Avuri (Indigofera Tinctoria) Powder 50g",
-    image: "Avuri (Indigofera Tinctoria) Powder 50g.jpg",
+    image: "pic/avuri powder",
     price: 8.50,
     weight: 50,
     description: "This hair growth oil is formulated with a key active ingredient that promotes new hair growth, adds thickness to hair, and conditions dry hair. Regular application of this oil will result in healthier and more lustrous hair. Suitable for all hair types. For External Use Only.\n• size: 50g"
@@ -602,7 +623,7 @@
   {
     id: 55,
     name: "Lemuju - Omam - Carom - Ajwain Seeds 250G",
-    image: "Lemuju - Omam - Carom - Ajwain Seeds 250G.jpg",
+    image: "pic/omam.jpg",
     price: 6.00,
     weight: 50,
     description: "Active enzymes in ajwainimprove the flow of stomach acids, which can help to relieve indigestion, bloating, and gas. The plant can also help to treat peptic ulcers as well as sores in the esophagus, stomach, and intestines"
@@ -658,7 +679,7 @@
   {
     id: 62,
     name: "Akar Sintuk - Akar Beluru - 2 ikat",
-    image: "Akar Sintuk - Akar Beluru - 2 ikat.jpg",
+    image: "pic/AkarSintuk.jpg",
     price: 2.20,
     weight: 50,
     description: "-Akar sintok terkenal sebagai syampu rambut. Ia menghilangkan kelemumur dan menjadikan rambut hitam berkilat.\n-Akar sintok turut digunakan dalam mandian jenazah selain daun bidara."
@@ -714,7 +735,7 @@
   {
     id: 69,
     name: "Neermulli Vithai - Biji maarof - Marsh Barbel - Hygrophila auriculata - Kokilaksha Seed 100g",
-    image: "Neermulli Vithai - Biji maarof - Marsh Barbel - Hygrophila auriculata - Kokilaksha Seed 100g.jpg",
+    image: "pic/neermulli.jpg",
     price: 8.00,
     weight: 100,
     description: "Neermulli seed is rich in vitamin E, iron, proteins etc. It helps increase the vitality in men and women. Increases red blood cells. It acts as renal tonic, diuretic, detoxifier, kidney stone breaker, reduce dry skin, and body heat."
@@ -907,7 +928,7 @@
   {
     id: 93,
     name: "Dry Amla - Nellikai - Indian Gooseberry 200gm",
-    image: "null",
+    image: "pic/Amla seeds.jpg",
     price: 9.50,
     weight: 200,
     description: "One of the best benefits of amla is that it has a high fibre content which works wonderfully for the digestive system. It's an effective cure for constipation. The dried powder of the amla fruit is also a great home remedy for hyperacidity and stomach ulcers.\n\nThe vitamins, minerals, and phyto nutrients present in the amla increases scalp circulation, strengthen hair follicles and stimulate healthy new growth. With its amazing bundle of antioxidants, amla supplements can get rid of free radicals that can cause hair fall, greying, wrinkles, and other signs of aging."
@@ -931,7 +952,7 @@
   {
     id: 96,
     name: "Natural Himalaya Black Salt - Kala Namak - Unblended - India 400g",
-    image: "null",
+    image: "pic/kala namak.jpg",
     price: 10.50,
     weight: 400,
     description: "- Kala Namak is considered a cooling spice in ayurvedic medicine and is recommended for many health issues such as constipation, indigestion, heartburn, bloating, flatulence, goiter, poor eyesight, and hysteria\n- It is sometimes recommended to people on low-salt diets due to hypertension because it\u2019s believed to be lower in sodium content compared to regular table salt.\n- helpful to promote the secretion of different digestive juices in the intestine, which ensures better digestion and helps in getting rid of digestive problems like gas and acidity\n- For people trying to lose weight, using Kala Namak in their salads and regular diet is common. While table salt is responsible for water retention in the body, Kala Namak works as a mild diuretic and helps in removing excess water from the body, which might give a natural and quick slimming effect"
@@ -947,7 +968,7 @@
   {
     id: 107,
     name: "Amla Powder - Nellikai 100g",
-    image: "null",
+    image: "pic/amla powder.jpg",
     price: 15.00,
     weight: 100,
     description: "Amla powder, available here, is dried and powdered Indian gooseberry. It's been used for thousands of years as one of the most potent and nourishing herbs in India.\nIt is an uncommon balance of sweet, sour, pungent and bitter flavors.\nBeing a very rich source of vitamin C, iron and calcium, Amla is a health treasure\nIt also offers a number of beauty benefits for your hair and skin\n_____________\n\nSome Benefits of Amla\nAmla powder is the purest form of Vitamin C and it enriches you from within by making the blood vessels stronger and thicker. It also improves your immunity so that you can fight infections easily .\n\nOne of the best amla powder benefits is that it\u00a0reduces the risk of heart disease by regulating the build-up of bad\u00a0cholestero.\n\nAmla is rich in\u00a0antioxidants that help in fighting free radicals in the body. This\u00a0reduces cell damage and also the risk of cancer and inflammation\nAnother one of amla powder benefits is that it\u00a0gives you\u00a0glowing skin\u00a0and also keeps it hydrated.\u00a0Consume it with water or add it to your face mask for natural glow. You can mix amla powder, honey and yogurt to make a quick face mask. Leave it on till it dries and then wash off. It will leave your skin smooth and clean.One of the best benefits of amla is that it has a high fibre content which works wonderfully for the digestive system. It's an\u00a0\neffective cure for\u00a0constipation.\n\n- The dried powder of the amla fruit is also a\u00a0great home remedy for hyperacidity and stomach ulcers\n-Amla is known for its\u00a0anti-inflammatory properties\n- it\u00a0reduces the acid level in the stomach and fights inflammation, suggests Dr. Komal\u00a0Bhadouria.\u00a0\n-One important benefit of amla is that it is considered as the first and foremost food for\u00a0anti-aging\n. Consuming amla in any form on a daily basis is the\u00a0secret behind the slow aging process and beautiful skin\n.\u00a0\nAmla powder is\u00a0good for diabetics\n. Amla contains chromium which makes the body more responsive to insulin and regulates the blood glucose levels.\n-Amla powder when taken with a teaspoon of honey acts as a\u00a0great blood purifier\n. You can also mix it with\u00a0jaggery and have it daily. Regular consumption of amla powder helps in increasing your haemoglobin naturally.\u00a0\n\nWant to use amla powder for hair?\n-You should! Amla is\u00a0great for your hair\n. It not only cures\u00a0dandruff but also helps in preventing hair loss.\nMake a paste with shikakai, curd and amla powder. Apply this on your scalp and leave it on for half in hour. You could also add few drops of lime to this pack to treat a dry scalp.\u00a0\n\n\nDosage:\n\nSince amla powder is a bit bitter tasting, you can drink a mix of amla powder, ginger powder, honey and lime juice or you can even add amla powder to a glass of fresh juice for breakfast.You can also sprinkle some amla powder on fruits such as banana, apple or papaya and have as a mid-meal snack."
@@ -987,7 +1008,7 @@
   {
     id: 112,
     name: "Arisi Tippili - Indian Long pepper - Cabai Sireh 100g",
-    image: "null",
+    image: "pic/arisi tippili.jpg",
     price: 17.00,
     weight: 100,
     description: "- Thippili orIndian long pepperis a medicinal plant found all over India, having extensiveusein herbal and ayurvedic preparations.\n- It is a vital ingredient of many ayurvedic and herbal preparations and has capabilities to treat many diorders like curing cough, cold, digestion problems, removing toxins, digestive issues, heartburn, intestinal gas, cholera, diarrhea and many more.\n- It is also used for lung problems including asthma, bronchitis."
@@ -1003,7 +1024,7 @@
   {
     id: 114,
     name: "Ashwagandha Root Herbs - Amukkara Kilangu - Winter Cherry 100g",
-    image: "null",
+    image: "pic/Amukkara root.jpg",
     price: 15.00,
     weight: 100,
     description: "Ashwagandha also known as Amukkara Kizhangu has a remarkable place in natural medicine.\nKnown for its greater supplies of anti-oxidants.\n\nit has also other benefits like helping maintaining stress, increasing energy levels and supports better sleep( insomnia).\nIn English it is identified as Winter Cherry."
@@ -1076,7 +1097,7 @@
   {
     id: 123,
     name: "Pure Fullers Earth Solid Bar Unblended - Multani Mitti 200g",
-    image: "Multani solid bar 1.jpg",
+    image: "null",
     price: 17.00,
     weight: 200,
     description: "- Multani Mitti is known to fight acne and pimples\n- Removes excess sebum and oil\n- Deep cleanses skin removing dirt, sweat and impurities\n- Evens out skin tone and brightens complexion\n- Treats tanning and pigmentation\n- Effective in treatings unburn,skin rashes and infections (multani mittiis an effective cooling agent)\n- Can be used in cold compresses to treat skin inflammation and insect bites\n- Facilitates blood circulation, leading to radiant, glowing skin\n- Fights and helps in keeping away blackheads/ whiteheads, blemishes, freckles, pimple/acne spots\n- Has antiseptic properties"
@@ -1100,7 +1121,7 @@
   {
     id: 126,
     name: "Akar Manis - Athimathuram - Licorice Root 100g",
-    image: "null",
+    image: "pic/licorice-root.jgp",
     price: 10.00,
     weight: 100,
     description: "- very good for getting relief from phlegm and inflammation in Mucus membrane.\n\n- Liquorice root's is an antioxidant, and anti-ulcer properties, which help in protecting the mucous membrane from minor inflammation and pain\n\n- It is great value in naturally treating sore throat, chest congestion, strengthening of bones and muscles, kidney problems, bronchitis, mouth ulcers, hair loss, etc ."
@@ -1306,14 +1327,6 @@
     price: 7.80,
     weight: 100,
     description: "Improves Immune Function.\nBalances Cholesterol.\nAnti-Bacterial and Fights Infections.\nFights Harmful Pathogens.\nReduces Inflammation.\nReduces Risk of Certain Cancers.\nImproves Cognitive Performance.\nSupports Liver Health and Function.\n\nHow to use:\n\nEat black seeds plain;\nEat a teaspoon of black seed mixed with honey;\nBoil black seed with water.\nHeat black seed and warm milk until it just begins to boil.\nGrind black seed and swallow it with water or milk;\nSprinkle on bread and pastries;"
-  },
-  {
-    id: 152,
-    name: "Organic Pure Ceylon Cinnamon Sticks,NOT CASSIA 50g",
-    image: "ceylon_cinnamon1.jpg",
-    price: 13.90,
-    weight: 50,
-    description: "Weight 50g (Net weight)\n2 to 3 inch long sticks\nGred C5 special\nCeylon Cinnamon sticks are soft\nLight-yellowish brown color and a highly fragrant aroma,\nRolled multiple thin strips of cinnamon bark\nAdd to curries or flavor rice even Tea"
   },
   {
     id: 153,
