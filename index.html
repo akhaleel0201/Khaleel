@@ -184,6 +184,7 @@ body {
     id: 152,
     name: "Organic Pure Ceylon Cinnamon Sticks,NOT CASSIA 50g",
     image: "pic/ceylon cinnamon.jpg",
+    images: ["pic/cinnamonbottle.jpg", "pic/typescinnamon.jpg"], // additional images
     price: 13.90,
     weight: 50,
     description: "Weight 50g (Net weight)\n2 to 3 inch long sticks\nGred C5 special\nCeylon Cinnamon sticks are soft\nLight-yellowish brown color and a highly fragrant aroma,\nRolled multiple thin strips of cinnamon bark\nAdd to curries or flavor rice even Tea"
@@ -204,6 +205,9 @@ body {
     weight: 50,
     description: "What are the health benefits of nilapanai kilangu? \nIt is said to be a restorative tonic that can cure weakness.\nIt is also said to be an aphrodisiac that can help with impotence, and low sperm count.\nIt is said to help with general body weakness, loss of stamina, and weight gain.\nIt is also said to help with itches and skin diseases."
   },
+
+
+
   {
     id: 3,
     name: "Cold Pressed Groundnut oil / Minyak Kacang Tanah 500ml",
@@ -1337,20 +1341,30 @@ body {
     weight: 500,
     shortDescription: "Benefits of Barnyard Millets.Source of dietary fibre.High in nutrition",
     description: "Benefits of Barnyard Millets:\n\n- Source of dietary fibre\n- High in nutrition:\n- Less calorie count:\n- Improves immunity:\n- Satiates                       Hunger:Reduces Sugar-levels :\n- Aids heart problems:"
-  },
+  }
+
+
+
+
 ];
 
     const container = document.getElementById('productContainer');
     const cart = [];
 
-    function renderProducts() {
+
+function renderProducts() {
   container.innerHTML = '';
   products.forEach(p => {
     const div = document.createElement('div');
     div.className = 'product';
 
+    // Extra images HTML
+    const extraImages = (p.images || []).map(img => `
+      <img src="${img}" class="extra-img" alt="${p.name}">
+    `).join('');
+
     div.innerHTML = `
-      <img src="${p.image}" alt="${p.name}">
+      <img src="${p.image}" alt="${p.name}" class="main-img">
       <div class="product-title">${p.name}</div>
       <div class="product-price">RM${p.price.toFixed(2)}</div>
       <div class="product-description">
@@ -1358,6 +1372,7 @@ body {
         <div id="details-${p.id}" class="product-details" style="display: none;">
           <div class="product-weight">Weight: ${p.weight}g</div>
           <p class="full-desc">${p.description}</p>
+          <div class="extra-images">${extraImages}</div>
         </div>
       </div>
       <form class="cart-form" onsubmit="addToCart(event, ${p.id})">
@@ -1366,11 +1381,10 @@ body {
       </form>
     `;
 
-    // Attach toggle logic except for form/button clicks
+    // Only toggle when not clicking on form
     div.addEventListener('click', (event) => {
       const tag = event.target.tagName.toLowerCase();
-      const isFormElement = tag === 'button' || tag === 'input' || tag === 'form';
-      if (!isFormElement && !event.target.closest('form')) {
+      if (!['input', 'button'].includes(tag) && !event.target.closest('form')) {
         toggleDescription(p.id);
       }
     });
@@ -1378,6 +1392,8 @@ body {
     container.appendChild(div);
   });
 }
+
+
 
    
 function getShortText(text, wordLimit) {
