@@ -1350,7 +1350,7 @@ body {
     div.className = 'product';
 
     div.innerHTML = `
-      <img src="${p.image}" >
+      <img src="${p.image}" alt="${p.name}">
       <div class="product-title">${p.name}</div>
       <div class="product-price">RM${p.price.toFixed(2)}</div>
       <div class="product-description">
@@ -1366,11 +1366,19 @@ body {
       </form>
     `;
 
-    // Add click handler to toggle product details
-    div.addEventListener('click', () => toggleDescription(p.id));
+    // Attach toggle logic except for form/button clicks
+    div.addEventListener('click', (event) => {
+      const tag = event.target.tagName.toLowerCase();
+      const isFormElement = tag === 'button' || tag === 'input' || tag === 'form';
+      if (!isFormElement && !event.target.closest('form')) {
+        toggleDescription(p.id);
+      }
+    });
+
     container.appendChild(div);
   });
 }
+
    
 function getShortText(text, wordLimit) {
   const words = text.split(" ");
@@ -1459,7 +1467,12 @@ function toggleDescription(id) {
         message += `- ${item.name} x ${item.qty} = RM${(item.price * item.qty).toFixed(2)}%0a`;
       });
       const total = document.getElementById('finalTotal').textContent;
-      message += `%0aTotal (with shipping): ${total}`;
+      const shippingfees = document.getElementById('shippingFee').textContent;
+      const grandtotal = document.getElementById('grandTotal').textContent;
+      
+      message += `%0aTotal: ${grandtotal}`;
+      message += `%0aShipping Fees: ${shippingfees}`;
+      message += `%0aFinal Total (with shipping): ${total}`;
       window.open(`https://wa.me/60165533200?text=${message}`, '_blank');
     }
 
