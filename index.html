@@ -1335,7 +1335,8 @@ body {
     image: "null",
     price: 8.30,
     weight: 500,
-    description: "Benefits of Barnyard Millets:\n\n- Source of dietary fibre\n- High in nutrition:\n- Less calorie count:\n- Improves immunity:\n- Satiates Hunger:\n- Reduces Sugar-levels :\n- Aids heart problems:"
+    shortDescription: "Benefits of Barnyard Millets.Source of dietary fibre.High in nutrition",
+    description: "Benefits of Barnyard Millets:\n\n- Source of dietary fibre\n- High in nutrition:\n- Less calorie count:\n- Improves immunity:\n- Satiates                       Hunger:Reduces Sugar-levels :\n- Aids heart problems:"
   },
 ];
 
@@ -1343,23 +1344,53 @@ body {
     const cart = [];
 
     function renderProducts() {
-      container.innerHTML = '';
-      products.forEach(p => {
-        const div = document.createElement('div');
-        div.className = 'product';
-        div.innerHTML = `
-          <img src="${p.image}" alt="${p.name}">
-          <div class="product-title">${p.name}</div>
-          <div class="product-price">RM${p.price.toFixed(2)}</div>
-          <div class="product-description">${p.description}</div>
-          <form class="cart-form" onsubmit="addToCart(event, ${p.id})">
-            <input type="number" id="qty-${p.id}" value="1" min="1" />
-            <button type="submit">Add to Cart</button>
-          </form>
-        `;
-        container.appendChild(div);
-      });
-    }
+  container.innerHTML = '';
+  products.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'product';
+
+    div.innerHTML = `
+      <img src="${p.image}" >
+      <div class="product-title">${p.name}</div>
+      <div class="product-price">RM${p.price.toFixed(2)}</div>
+      <div class="product-description">
+        <span id="short-${p.id}" class="short-desc">${getShortText(p.description, 10)}</span>
+        <div id="details-${p.id}" class="product-details" style="display: none;">
+          <div class="product-weight">Weight: ${p.weight}g</div>
+          <p class="full-desc">${p.description}</p>
+        </div>
+      </div>
+      <form class="cart-form" onsubmit="addToCart(event, ${p.id})">
+        <input type="number" id="qty-${p.id}" value="1" min="1" />
+        <button type="submit">Add to Cart</button>
+      </form>
+    `;
+
+    // Add click handler to toggle product details
+    div.addEventListener('click', () => toggleDescription(p.id));
+    container.appendChild(div);
+  });
+}
+   
+function getShortText(text, wordLimit) {
+  const words = text.split(" ");
+  if (words.length <= wordLimit) return text;
+  return words.slice(0, wordLimit).join(" ") + "...";
+}
+
+function toggleDescription(id) {
+  const shortDesc = document.getElementById(`short-${id}`);
+  const details = document.getElementById(`details-${id}`);
+
+  if (details.style.display === "none") {
+    details.style.display = "block";
+    shortDesc.style.display = "none";
+  } else {
+    details.style.display = "none";
+    shortDesc.style.display = "inline";
+  }
+}
+
 
     function addToCart(event, id) {
       event.preventDefault();
