@@ -90,6 +90,15 @@ body {
       max-width: 600px;
       margin: auto;
     }
+    .cart-thumb {
+     width: 40px;
+     height: 40px;
+     object-fit: cover;
+     border-radius: 4px;
+     margin-right: 5px;
+     vertical-align: middle;
+     }
+
     .summary table {
       width: 100%;
       border-collapse: collapse;
@@ -1439,24 +1448,35 @@ function toggleDescription(id) {
       updateSummary();
     }
 
-    function updateSummary() {
-      const tbody = document.querySelector('#summaryTable tbody');
-      tbody.innerHTML = '';
-      let subtotal = 0;
-      let totalWeight = 0;
-      cart.forEach((item, i) => {
-        subtotal += item.price * item.qty;
-        totalWeight += item.weight * item.qty;
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${i + 1}</td>
-          <td>${item.name}</td>
-          <td><input type="number" value="${item.qty}" min="1" onchange="updateQty(${i}, this.value)" /></td>
-          <td>RM${(item.price * item.qty).toFixed(2)}</td>
-          <td><button onclick="removeItem(${i})">Remove</button></td>
-        `;
-        tbody.appendChild(tr);
-      });
+ function updateSummary() {
+  const tbody = document.querySelector('#summaryTable tbody');
+  tbody.innerHTML = '';
+  let subtotal = 0;
+  let totalWeight = 0;
+
+  cart.forEach((item, i) => {
+    subtotal += item.price * item.qty;
+    totalWeight += item.weight * item.qty;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td>
+        <img src="${item.image}" alt="${item.name}" class="cart-thumb" />
+        ${item.name}
+      </td>
+      <td>
+        <input type="number" value="${item.qty}" min="1" onchange="updateQty(${i}, this.value)" />
+      </td>
+      <td>RM${(item.price * item.qty).toFixed(2)}</td>
+      <td><button onclick="removeItem(${i})">Remove</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // update totals somewhere else if needed
+
+
 
       let shipping = 4;
       if (totalWeight > 5000) {
