@@ -133,6 +133,35 @@ body {
     }
      
 
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+.image-modal .modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+.image-modal .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 
     .footer {
       text-align: center;
@@ -234,6 +263,7 @@ body {
     id: 4,
     name: "Naayuruvi Vithai Seeds Powder - Chaff Flower - Achyranthes Aspera 50g",
     image: "pic/nayurivi 3.jpg",
+    images:["pic/nayurivi 2.jpg","pic/nayurivi 1.jpg"],
     price: 8.50,
     weight: 500,
     description: "-Helps in digestion\n-Laxative and constipation\n-Relief from piles"
@@ -242,6 +272,7 @@ body {
     id: 5,
     name: "Amukkara Powder - Ashwagandha Root Powder 100g",
     image: "pic/amukkara.jpg",
+    images: ["pic/amukkara powder.jpg"], 
     price: 17.50,
     weight: 100,
     description: "• 100g per bottle \n• Amukkara Kizhangu powder is used for the treatment of rheumatic disorders \n• Insomnia (sleeplessness) \n• male infertility due to oligospermia (low count)."
@@ -347,6 +378,7 @@ body {
     id: 19,
     name: "Arugampul Powder - BermudaGrass Powder 50G",
     image: "pic/arugampul powder.jpg",
+    images: ["pic/arugampul powder 1.jpg", "pic/arugampul powder 2.jpg","pic/arugampul powder 2.jpg"],
     price: 9.50,
     weight: 50,
     description: "This grass is packed with nutrients like chlorophyll, antioxidants, vitamins, and minerals, which offer powerful detoxifying effects.\nIt is commonly used to cleanse the body of toxins, boost immunity, and improve digestion. Regular consumption of Bermuda grass powder can enhance energy levels and support overall wellness.\nAdditionally, Bermuda grass is beneficial for skincare, helping to improve skin tone and reduce inflammation, while also promoting healthy hair growth when used as a mask or in hair oil. It has been used to regulate blood sugar levels, making it a traditional remedy for managing diabetes."
@@ -403,6 +435,7 @@ body {
     id: 26,
     name: "Avarampoo Powder- Tanner’s cassia powder 50g",
     image: "pic/avarampoo5.jpg",
+    images:["pic/avarampoo2.jpg"],
     price: 8.50,
     weight: 50,
     description: "● Avarampoo or Avaram Senna is a common tree in Asia, which has been widely used in Indian traditional medicine. The tree grows wildly and found abundantly near the river beds. Avaram Senna flower, which is called as Tanner’s cassia is bright yellow in color. The dried flowers and buds have many therapeutic benefits. In Ayurveda, Avaram Senna flower is used for treating diabetes.\n● Its an herb that has the ability to cure diabetes. besides, curing diabetes, it has various other properties that promote overall health. It also aids in maintaining the body temperature when it is consumed as a tea"
@@ -635,6 +668,7 @@ body {
     id: 55,
     name: "Lemuju - Omam - Carom - Ajwain Seeds 250G",
     image: "pic/omam.jpg",
+    images:["pic/omam 2.jpg"],
     price: 6.00,
     weight: 50,
     description: "Active enzymes in ajwainimprove the flow of stomach acids, which can help to relieve indigestion, bloating, and gas. The plant can also help to treat peptic ulcers as well as sores in the esophagus, stomach, and intestines"
@@ -915,7 +949,7 @@ body {
   {
     id: 90,
     name: "Chandrika Ayurvedic Herbal Soap 10 Pcs",
-    image: "null",
+    image: "pic/chandrika soap.jpg",
     price: 27.00,
     weight: 500,
     description: "- Made from Coconut Oil\n- Wild Ginger\n- Lime Peel Oil\n- Hydnocarpus Oil\n- Orange Oil\n- Sandalwood Oil"
@@ -940,6 +974,7 @@ body {
     id: 93,
     name: "Dry Amla - Nellikai - Indian Gooseberry 200gm",
     image: "pic/Amla seeds.jpg",
+    images: ["pic/amla packet.jpg", "pic/amla 2.jpg"],
     price: 9.50,
     weight: 200,
     description: "One of the best benefits of amla is that it has a high fibre content which works wonderfully for the digestive system. It's an effective cure for constipation. The dried powder of the amla fruit is also a great home remedy for hyperacidity and stomach ulcers.\n\nThe vitamins, minerals, and phyto nutrients present in the amla increases scalp circulation, strengthen hair follicles and stimulate healthy new growth. With its amazing bundle of antioxidants, amla supplements can get rid of free radicals that can cause hair fall, greying, wrinkles, and other signs of aging."
@@ -955,7 +990,8 @@ body {
   {
     id: 95,
     name: "Dry Avarampoo - Tanner’s cassia 100g",
-    image: "null",
+    image: "pic/avarampoo1.jpg",
+    images:["pic/avarampoo.jpg","pic/avarampoo2.jpg"],
     price: 7.50,
     weight: 100,
     description: "- Avarampoo or Avaram Senna is a common tree in Asia, which has been widely used in Indian traditional medicine. The tree grows wildly and found abundantly near the river beds. Avaram Senna flower, which is called as Tanner\u2019s cassia is bright yellow in color. The dried flowers and buds have many therapeutic benefits. In Ayurveda, Avaram Senna flower is used for treating diabetes.\n- Its an herb that has the ability to cure diabetes. besides, curing diabetes, it has various other properties that promote overall health. It also aids in maintaining the body temperature when it is consumed as a tea"
@@ -1020,6 +1056,7 @@ body {
     id: 112,
     name: "Arisi Tippili - Indian Long pepper - Cabai Sireh 100g",
     image: "pic/arisi tippili.jpg",
+    images:["pic/Arisithippili Rasam.jpg"],
     price: 17.00,
     weight: 100,
     description: "- Thippili orIndian long pepperis a medicinal plant found all over India, having extensiveusein herbal and ayurvedic preparations.\n- It is a vital ingredient of many ayurvedic and herbal preparations and has capabilities to treat many diorders like curing cough, cold, digestion problems, removing toxins, digestive issues, heartburn, intestinal gas, cholera, diarrhea and many more.\n- It is also used for lung problems including asthma, bronchitis."
@@ -1132,7 +1169,8 @@ body {
   {
     id: 126,
     name: "Akar Manis - Athimathuram - Licorice Root 100g",
-    image: "pic/licorice-root.jgp",
+    image: "pic/licorice-root.jpg",
+    images:["pic/athimathuram1.jpg"],
     price: 10.00,
     weight: 100,
     description: "- very good for getting relief from phlegm and inflammation in Mucus membrane.\n\n- Liquorice root's is an antioxidant, and anti-ulcer properties, which help in protecting the mucous membrane from minor inflammation and pain\n\n- It is great value in naturally treating sore throat, chest congestion, strengthening of bones and muscles, kidney problems, bronchitis, mouth ulcers, hair loss, etc ."
@@ -1278,7 +1316,7 @@ body {
   {
     id: 144,
     name: "Bay Leaves - Briyani Leaves - Daun Briyani 50g",
-    image: "null",
+    image: "pic/bay leaf.jpg",
     price: 3.00,
     weight: 50,
     description: "Bay leaves are commonly found in biryani, soups, curries. Also known as tej patta, this culinary herb makes for an integral part of the cuisine for its distinctive flavour and fragrance. Apart from this, it is also known for its age-old medicinal properties"
@@ -1294,7 +1332,8 @@ body {
   {
     id: 146,
     name: "Organic Pure Fenugreek Seed Powder -Serbuk Biji Halba 100g",
-    image: "null",
+    image: "pic/Fenugreek pow.jpg",
+    images:["pic/Fenu desc.jpg"],
     price: 9.50,
     weight: 100,
     description: "-100% Genuine Without any mixture\n-Controls blood sugar levels\n-Lowers blood cholesterol\n-Reduces risk of heart disease\n-Aids digestion\n-boosting testosterone and increasing milk production in breastfeeding mothers\n-Reduce fat mass.\n-Maintain liver and kidney health.\n-Soothe muscle pain.\n-Reduce fever.\n-Fenugreek may also lower inflammation and help with appetite control\n-Fenugreek seeds also have high protein and nicotinic acid content, which are known to be beneficial against hair fall and dandruff, and in treating a variety of scalp issues like dryness of hair, baldness and hair thinning.\n- Please store in refrigerator\n\nDosage: To be taken with 2 tea spoon of fenugreek powder mix with one glass of water."
@@ -1550,38 +1589,6 @@ function toggleDescription(id) {
   <span class="close-btn">&times;</span>
   <img class="modal-content" id="modalImage">
 </div>
-
-<style>
-.image-modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.9);
-}
-.image-modal .modal-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 80vh;
-  border-radius: 10px;
-}
-.image-modal .close-btn {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  color: #fff;
-  font-size: 30px;
-  font-weight: bold;
-  cursor: pointer;
-}
-</style>
-
 
 </body>
 </html>
