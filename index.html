@@ -131,6 +131,9 @@ body {
       border-radius: 5px;
       cursor: pointer;
     }
+     
+
+
     .footer {
       text-align: center;
       font-size: 12px;
@@ -182,6 +185,8 @@ body {
   <img src="khaleel ent QR.jpg" alt="TnG QR Code" style="width: 200px; border: 1px solid #ccc; padding: 5px;" />
   <br /><br />
    </div>
+    
+
 
   <div class="footer">
     &copy; 2025 Khaleel Mart. All rights reserved.
@@ -1369,11 +1374,13 @@ function renderProducts() {
 
     // Extra images HTML
     const extraImages = (p.images || []).map(img => `
-      <img src="${img}" class="extra-img" alt="${p.name}">
+     <img src="${img}" class="extra-img" alt="${p.name}" onclick="zoomImage('${img}')">
     `).join('');
 
     div.innerHTML = `
-      <img src="${p.image}" alt="${p.name}" class="main-img">
+      <img src="${p.image}" alt="${p.name}" class="main-img" onclick="zoomImage('${p.image}')">
+
+    
       <div class="product-title">${p.name}</div>
       <div class="product-price">RM${p.price.toFixed(2)}</div>
       <div class="product-description">
@@ -1403,6 +1410,16 @@ function renderProducts() {
 }
 
 
+function zoomImage(src) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  modal.style.display = "block";
+  modalImg.src = src;
+}
+
+function closeImageModal() {
+  document.getElementById('imageModal').style.display = "none";
+}
 
    
 function getShortText(text, wordLimit) {
@@ -1525,5 +1542,46 @@ function toggleDescription(id) {
 }
 
   </script>
+
+
+
+ <!-- Zoom Modal -->
+<div id="imageModal" class="image-modal" onclick="closeImageModal()">
+  <span class="close-btn">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<style>
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+.image-modal .modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+.image-modal .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+
+
 </body>
 </html>
