@@ -161,6 +161,26 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+			.top-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 999;
+  flex-wrap: wrap;
+}
+
+.top-bar input[type="text"] {
+  flex: 1;
+  min-width: 150px;
+}
+
+.top-bar button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
 
 
     .footer {
@@ -178,6 +198,8 @@ body {
   
   <input type="text" id="searchInput" placeholder="Search product..." />
   <button onclick="searchProduct()">Search</button>
+  <button onclick="showAllProducts()">Show All</button>
+  <button onclick="scrollToCart()">View Cart</button>
 </div>
   <div class="container" id="productContainer"></div>
 
@@ -1410,21 +1432,31 @@ body {
     const cart = [];
 
 
-function renderProducts() {
+		function saveCart() {
+  			localStorage.setItem('cart', JSON.stringify(cart));
+				}
+
+		function loadCart() {
+ 				 const savedCart = localStorage.getItem('cart');
+ 				 if (savedCart) {
+    				cart = JSON.parse(savedCart);
+   				 updateSummary();
+  				}
+			}
+
+function renderProducts(list = products) {
   container.innerHTML = '';
-  products.forEach(p => {
+  list.forEach(p => {
     const div = document.createElement('div');
     div.className = 'product';
 
     // Extra images HTML
     const extraImages = (p.images || []).map(img => `
-     <img src="${img}" class="extra-img" alt="${p.name}" onclick="zoomImage('${img}')">
+      <img src="${img}" class="extra-img" alt="${p.name}" onclick="zoomImage('${img}')">
     `).join('');
 
     div.innerHTML = `
       <img src="${p.image}" alt="${p.name}" class="main-img" onclick="zoomImage('${p.image}')">
-
-    
       <div class="product-title">${p.name}</div>
       <div class="product-price">RM${p.price.toFixed(2)}</div>
       <div class="product-description">
@@ -1486,26 +1518,39 @@ function toggleDescription(id) {
 }
 
 
-    function addToCart(event, id) {
-      event.preventDefault();
-      const qty = parseInt(document.getElementById(`qty-${id}`).value);
-      const product = products.find(p => p.id === id);
-      const existing = cart.find(item => item.id === id);
-      if (existing) {
-        existing.qty += qty;
-      } else {
-        cart.push({ ...product, qty });
-      }
-      updateSummary();
-    }
+    function addToCart(event, productId) {
+  event.preventDefault();
+  const qty = parseInt(document.getElementById(`qty-${productId}`).value);
+  const product = products.find(p => p.id === productId);
+  const existing = cart.find(item => item.id === productId);
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      weight: product.weight,
+      image: product.image,
+      qty: qty
+    });
+  }
+
+  saveCart();   // <-- Save to localStorage
+  updateSummary();
+}
+
 
     function removeItem(index) {
       cart.splice(index, 1);
+      saveCart();
       updateSummary();
     }
 
     function updateQty(index, newQty) {
       cart[index].qty = parseInt(newQty);
+      saveCart();
       updateSummary();
     }
 
@@ -1554,6 +1599,23 @@ function toggleDescription(id) {
       document.getElementById('shippingFee').textContent = `RM${shipping.toFixed(2)}`;
       document.getElementById('finalTotal').textContent = `RM${(subtotal + shipping).toFixed(2)}`;
     }
+        
+         function showAllProducts() {
+          document.getElementById('searchInput').value = '';
+           filterProducts();
+         }
+
+       function scrollToCart() {
+          const cartSection = document.getElementById('cartSection') || document.querySelector('#summaryTable');
+          if (cartSection) {
+          cartSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+
+				
+		
+
+
 
     function confirmOrder() {
       const name = document.getElementById('name').value;
@@ -1575,7 +1637,7 @@ function toggleDescription(id) {
 
     renderProducts();
 
-  function searchProduct() {
+ function searchProduct() {
   const query = document.getElementById('searchInput').value.toLowerCase();
   const products = document.querySelectorAll('.product');
 
@@ -1584,6 +1646,18 @@ function toggleDescription(id) {
     product.style.display = name.includes(query) ? '' : 'none';
   });
 }
+
+
+ function showAllProducts() {
+  document.getElementById('searchInput').value = ''; // Clear search box
+  renderProducts(products); // ✅ Restore full list
+}
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCart();  // Restore cart from localStorage
+    });
+
 
   </script>
 
